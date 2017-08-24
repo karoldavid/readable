@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import { Route, Switch } from 'react-router-dom'
 import * as ReadableAPI from '../utils/ReadableAPI'
 import CategoryList from './CategoryList'
 import PostList from './PostList' 
+import NoMatch from './NoMatch'
 
 class App extends Component {
   state = {
@@ -22,8 +24,16 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <CategoryList categories={this.state.categories}/>
-        <PostList posts={this.state.posts}/>
+
+        <Switch>
+          <Route exact path="/" render={() => (
+            <div>
+              <CategoryList categories={this.state.categories}/>
+              <PostList posts={this.state.posts}/>
+            </div>
+          )}/>
+          <Route component={NoMatch}/>
+        </Switch>
       </div>
     )
   }
