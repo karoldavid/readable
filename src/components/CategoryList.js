@@ -5,6 +5,7 @@ class CategoryList extends Component {
 
 	render() {
 		const { categories } = this.props
+		console.log(this.props)
 		return (
 			<div> 
 				<h3>Choose a Category</h3>

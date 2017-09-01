@@ -8,7 +8,6 @@ import NoMatch from './NoMatch'
 
 class App extends Component {
   state = {
-    categories: [],
     posts: [],
   }
 
@@ -29,7 +28,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" render={() => (
             <div>
-              <CategoryList categories={this.state.categories}/>
+              <CategoryList categories={this.props.categories}/>
               <PostList posts={this.state.posts}/>
             </div>
           )}/>
