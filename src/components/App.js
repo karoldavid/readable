@@ -40,13 +40,13 @@ class App extends Component {
   }
 }
 
-function mapStateToProps ({ categories /*food, calendar*/ }) {
+function mapStateToProps ({ categories }) {
   return { categories }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    fetch: () => fetchCategories()
+    fetch: () => dispatch(fetchCategories())
   }
 }
 
