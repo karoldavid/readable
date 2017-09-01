@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
-import * as ReadableAPI from '../utils/ReadableAPI'
+import { fetchCategories } from '../actions'
 import CategoryList from './CategoryList'
 import PostList from './PostList' 
 import NoMatch from './NoMatch'
@@ -12,13 +13,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    ReadableAPI.getAllCategories().then((categories) => {
-      this.setState({ categories: categories })
-    })
-    ReadableAPI.getAllPosts().then((posts) => {
-      console.log(posts);
-      this.setState({ posts: posts })
-    })
+   // ReadableAPI.getAllCategories().then((categories) => {
+      //this.setState({ categories: categories })
+   // })
+   // ReadableAPI.getAllPosts().then((posts) => {
+   //   this.setState({ posts: posts })
+   // })
+    this.props.fetch();
   }
 
   render() {
@@ -39,4 +40,17 @@ class App extends Component {
   }
 }
 
-export default App
+function mapStateToProps ({ categories /*food, calendar*/ }) {
+  return { categories }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    fetch: () => fetchCategories()
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)
