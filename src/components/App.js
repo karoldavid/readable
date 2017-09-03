@@ -3,18 +3,14 @@ import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
 import { fetchCategories } from '../actions'
 import { fetchPosts } from '../actions'
+
 import CategoryList from './CategoryList'
 import PostList from './PostList' 
+import Category from './Category'
 import NoMatch from './NoMatch'
 
 class App extends Component {
   componentDidMount() {
-   // ReadableAPI.getAllCategories().then((categories) => {
-      //this.setState({ categories: categories })
-   // })
-   // ReadableAPI.getAllPosts().then((posts) => {
-   //   this.setState({ posts: posts })
-   // })
     this.props.fetch();
     this.props.getAllPosts();
   }
@@ -30,6 +26,7 @@ class App extends Component {
               <PostList posts={this.props.posts}/>
             </div>
           )}/>
+          <Route path="/category/:catID" component={Category}/>
           <Route component={NoMatch}/>
         </Switch>
       </div>
