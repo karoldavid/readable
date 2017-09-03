@@ -7,7 +7,7 @@ class Category extends Component {
 		return(
 			<div>
 				<div>Category: {category}</div>
-				<Link to="/">Back to Main</Link>
+				<Link to="/"><button className="btn waves-effect waves-light">Back to Main</button></Link>
 			</div>
 		)
 	}
