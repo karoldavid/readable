@@ -7,6 +7,7 @@ import { fetchPosts } from '../actions'
 import CategoryList from './CategoryList'
 import PostList from './PostList' 
 import Category from './Category'
+import ShowPost from './ShowPost'
 import NoMatch from './NoMatch'
 
 class App extends Component {
@@ -20,13 +21,15 @@ class App extends Component {
       <div className="app">
 
         <Switch>
+
+          <Route path="/category/:catID" component={Category}/>
+          <Route path="/posts/:id" component={ShowPost}/>
           <Route exact path="/" render={() => (
             <div>
               <CategoryList categories={this.props.categories}/>
               <PostList posts={this.props.posts}/>
             </div>
           )}/>
-          <Route path="/category/:catID" component={Category}/>
           <Route component={NoMatch}/>
         </Switch>
       </div>
