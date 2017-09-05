@@ -12,10 +12,10 @@ class Category extends Component {
 		return(
 			<div>
 				<h3>Category: {category}</h3>
-				<ul>
+				<ul className="collection">
 					{posts.map((post) => (
 
-						<li>{post.title}</li>
+						<li className="collection-item">{post.title}</li>
 					))}
 
 				</ul>

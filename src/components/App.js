@@ -26,8 +26,8 @@ class App extends Component {
           <Route path="/posts/:id" component={ShowPost}/>
           <Route exact path="/" render={() => (
             <div>
-              <CategoryList categories={this.props.categories}/>
-              <PostList posts={this.props.posts}/>
+              <CategoryList/>
+              <PostList/>
             </div>
           )}/>
           <Route component={NoMatch}/>
