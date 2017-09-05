@@ -8,6 +8,16 @@ class ShowPost extends Component {
 		this.props.getPost(id)
 	}
 
+	showPost(post) {
+		return(
+			<div>
+				<h3>{post.title}</h3>
+				<p>{post.category} {post.author} {post.voteScore}</p>
+				<p>{post.body}</p>
+			</div>
+		)
+	}
+
 	render() {
 		const { post } = this.props
 
@@ -16,9 +26,7 @@ class ShowPost extends Component {
 		}
 
 		return(
-			<div>
-				{post.title}
-			</div>
+			<div>{ this.showPost(post) }</div>
 		)
 	}
 }
