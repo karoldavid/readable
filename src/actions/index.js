@@ -26,7 +26,7 @@ export const fetchPosts = () => dispatch => (
 		.then(posts => dispatch(receivePosts(posts)))
 )
 
-export const receivePost = post =>({
+export const receivePost = post => ({
 	type: RECEIVE_POST,
 	post
 })

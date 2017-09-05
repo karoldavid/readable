@@ -1,5 +1,6 @@
 import { RECEIVE_CATEGORIES } from '../actions'
 import { RECEIVE_POSTS } from '../actions'
+import { RECEIVE_POST } from '../actions'
 
 import { combineReducers } from 'redux'
 
@@ -21,7 +22,17 @@ function posts(state = [], action) {
 	}
 }
 
+function post(state = {}, action) {
+	switch (action.type) {
+		case RECEIVE_POST:
+			return action.post
+		default:
+			return state
+	}
+}
+
 export default combineReducers({
   categories,
-  posts
+  posts,
+  post
 })

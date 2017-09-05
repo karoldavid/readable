@@ -9,12 +9,22 @@ class ShowPost extends Component {
 	}
 
 	render() {
+		const { post } = this.props
+
+		if (!post) {
+			return <div>Loading post... </div>
+		}
+
 		return(
 			<div>
-				Show Post!
+				{post.title}
 			</div>
 		)
 	}
+}
+
+function mapStateToProps({ post }) {
+	return { post }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -23,4 +33,4 @@ function mapDispatchToProps(dispatch) {
 	}
 }
 
-export default connect(null, mapDispatchToProps)(ShowPost) 
+export default connect(mapStateToProps, mapDispatchToProps)(ShowPost) 
