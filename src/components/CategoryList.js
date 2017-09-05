@@ -11,7 +11,9 @@ class CategoryList extends Component {
 				<h3>Choose a Category</h3>
 				<ul>
 	          		{categories.map((category) => (
-	            		<li key={category.name}><Link to={{ pathname: `/category/${category.name}`}}>{category.name}</Link></li>
+	            		<li key={category.name}>
+	            			<Link to={{ pathname: `/category/${category.name}`}}>{category.name}</Link>
+	            		</li>
 	          		))}
 	        	</ul>
         	</div>

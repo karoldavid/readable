@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class PostList extends Component {
 
@@ -9,7 +10,9 @@ class PostList extends Component {
                 <h3>Posts</h3>
         		<ul>
               		{posts.map((post) => (
-                		<li key={post.title}>{post.title}</li>
+                		<li key={post.title}>
+                            <Link to={{ pathname: `/posts/${post.id}`}}>{post.title}</Link>
+                        </li>
                 	))}
             	</ul>
             </div>
