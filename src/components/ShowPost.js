@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchPost } from '../actions'
+import { Link } from 'react-router-dom'
 
 class ShowPost extends Component {
 	componentDidMount() {
@@ -11,6 +12,7 @@ class ShowPost extends Component {
 	showPost(post) {
 		return(
 			<div>
+				<Link to="/">Back To Main Page</Link>
 				<h3>{post.title}</h3>
 				<p>{post.category} {post.author} {post.voteScore}</p>
 				<p>{post.body}</p>
