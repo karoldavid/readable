@@ -29,6 +29,8 @@ class PostList extends Component {
         		<ul className="collection">
                     {this.renderPostList(posts)}
             	</ul>
+
+                <Link to="/posts/new"><button className="btn waves-effect waves-light">Create New Post</button></Link>
             </div>
        )
     }

@@ -8,6 +8,7 @@ import CategoryList from './CategoryList'
 import PostList from './PostList' 
 import Category from './Category'
 import ShowPost from './ShowPost'
+import NewPost from './NewPost'
 import NoMatch from './NoMatch'
 
 class App extends Component {
@@ -21,8 +22,8 @@ class App extends Component {
       <div className="app">
 
         <Switch>
-
           <Route path="/category/:cat" component={Category}/>
+          <Route path="/posts/new" component={NewPost}/>
           <Route path="/posts/:id" component={ShowPost}/>
           <Route exact path="/" render={() => (
             <div>
