@@ -22,7 +22,7 @@ class App extends Component {
 
         <Switch>
 
-          <Route path="/category/:catID" component={Category}/>
+          <Route path="/category/:cat" component={Category}/>
           <Route path="/posts/:id" component={ShowPost}/>
           <Route exact path="/" render={() => (
             <div>
