@@ -47,6 +47,13 @@ class NewPost extends Component {
 						className="input-field"
 						component={this.renderField}
 					/>
+					<Field
+						name="author"
+						type="text"
+						label="Author Name"
+						className="input-field"
+						component={this.renderField}
+					/>
 					 <button type="submit" className="btn waves-effect waves-light">
 						Save Post
   					</button>

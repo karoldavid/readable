@@ -30,18 +30,16 @@ export const getPost = (id) => {
 		.then(data => data)
 }
 
-export const savePost = (params) => {
+export const savePost = (data) => {
 
 	const post = {
         id: uuidv1(),
         timestamp: Date.now(),
-        title: 'Announcing 60,000 Challenge Scholarships from Udacity and Google',
-        body: 'Udacity and Google share a commitment to increasing learning opportunities for deserving students across the globe, and this mission has been the cornerstone of our partnership from the start. Most recently, we launched an ambitious scholarship initiative across Europe for aspiring Android developers. As a result, thousands of students earned the opportunity to master job-ready skills.',
-        owner: 'Stuart Frye',
-        category: 'udacity'
+        title: data.title,
+        body: data.body,
+        owner: data.author,
+        category: data.category
     }
-
-    console.log(post)
 
 	return fetch(`${api}/posts`, {
 		method: 'POST',
