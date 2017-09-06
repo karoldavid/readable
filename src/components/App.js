@@ -13,7 +13,7 @@ import NoMatch from './NoMatch'
 
 class App extends Component {
   componentDidMount() {
-    this.props.fetch();
+    this.props.getAllCategories();
     this.props.getAllPosts();
   }
 
@@ -44,7 +44,7 @@ function mapStateToProps ({ categories, posts }) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    fetch: () => dispatch(fetchCategories()),
+    getAllCategories: () => dispatch(fetchCategories()),
     getAllPosts: () => dispatch(fetchPosts())
   }
 }
