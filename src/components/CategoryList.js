@@ -4,22 +4,28 @@ import { Link } from 'react-router-dom'
 
 class CategoryList extends Component {
 
+
+	renderCategoryList(categories) {
+		return (
+			categories.map((category) => (
+				<li key={category.name} className="collection-item">
+	            	<Link
+	            		to={{ pathname: `/category/${category.name}`}}>
+	            		{category.name}
+	            	</Link>
+	            </li>
+	        ))
+		)
+	}
+
 	render() {
 		const { categories } = this.props
-
-		if (!categories) {
-			return <div>Loading...</div>
-		}
 
 		return (
 			<div> 
 				<h3>Choose a Category</h3>
 				<ul className="collection">
-	          		{categories.map((category) => (
-	            		<li key={category.name} className="collection-item">
-	            			<Link to={{ pathname: `/category/${category.name}`}}>{category.name}</Link>
-	            		</li>
-	          		))}
+					{this.renderCategoryList(categories)}
 	        	</ul>
         	</div>
 		)

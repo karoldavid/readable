@@ -8,7 +8,6 @@ class Category extends Component {
 		const category = this.props.match.params.catID
 		const { posts } = this.props
 
-		console.log(posts)
 		return(
 			<div>
 				<h3>Category: {category}</h3>

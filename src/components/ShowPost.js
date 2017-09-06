@@ -12,7 +12,7 @@ class ShowPost extends Component {
 	showPost(post) {
 		return(
 			<div>
-				<Link to="/posts">Back To Main Page</Link>
+				<Link to="/">Back To Main Page</Link>
 				<h3>{post.title}</h3>
 				<p>{post.category} {post.author} {post.voteScore}</p>
 				<p>{post.body}</p>
