@@ -4,10 +4,13 @@ import { Link } from 'react-router-dom'
 
 class Category extends Component {
 
-	renderCategoryPostList(posts) {
+	renderCategoryPostList(posts, category) {
+		const matchingPosts = posts.filter(post => post.category === category)
+
 		return(
-			posts.map((post) => (
-				<li className="collection-item">{post.title}</li>
+
+			matchingPosts.map((post) => (
+				<li key={post.id} className="collection-item">{post.title}</li>
 			))
 		)
 	}
@@ -20,7 +23,7 @@ class Category extends Component {
 			<div>
 				<h3>Category: {category}</h3>
 				<ul className="collection">
-					{this.renderCategoryPostList(posts)}
+					{this.renderCategoryPostList(posts, category)}
 				</ul>
 				<Link to="/"><button className="btn waves-effect waves-light">Back to Main</button></Link>
 			</div>
