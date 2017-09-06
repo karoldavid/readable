@@ -3,6 +3,7 @@ import * as ReadableAPI from '../utils/ReadableAPI'
 export const RECEIVE_CATEGORIES = "RECEIVE_CATEGORIES";
 export const RECEIVE_POSTS = "RECEIVE_POSTS";
 export const RECEIVE_POST = "RECEIVE_POST"
+export const SAVE_POST = "SAVE_POST"
 
 export const receiveCategories = categories => ({
   type: RECEIVE_CATEGORIES,
@@ -35,4 +36,15 @@ export const fetchPost = (id) => dispatch => (
 	ReadableAPI
 		.getPost(id)
 		.then(post => dispatch(receivePost(post)))
+)
+
+export const submitPost = post => dispatch => ({
+	type: SAVE_POST,
+	post
+})
+
+export const savePost = (post) => dispatch => (
+	ReadableAPI
+	.savePost(post)
+	.then(post => dispatch(submitPost(post)))
 )

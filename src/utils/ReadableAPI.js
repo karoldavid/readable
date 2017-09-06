@@ -27,3 +27,9 @@ export const getPost = (id) => {
 		.then(res => res.json())
 		.then(data => data)
 }
+
+export const savePost = (post) => {
+	return fetch(`${api}/posts`, { post, headers })
+		.then(res => res.json())
+		.then(data => data)
+}

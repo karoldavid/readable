@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
+import { savePost } from '../actions'
 
 class NewPost extends Component {
 
@@ -32,6 +33,20 @@ class NewPost extends Component {
 						className="input-field"
 						component={this.renderField}
 					/>
+					<Field
+						name="category"
+						type="text"
+						label="Post Category"
+						className="input-field"
+						component={this.renderField}
+					/>
+					<Field
+						name="body"
+						type="text"
+						label="Post Content"
+						className="input-field"
+						component={this.renderField}
+					/>
 					 <button type="submit" className="btn waves-effect waves-light">
 						Save Post
   					</button>
@@ -41,6 +56,11 @@ class NewPost extends Component {
 	}
 }
 
+function mapDispatchToProps(dispatch) {
+	return {
+		savePost: (post) => dispatch(savePost(post))
+	}
+}
 
 export default reduxForm({
 	form: 'NewPostForm'
