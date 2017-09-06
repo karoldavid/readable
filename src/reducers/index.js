@@ -3,6 +3,7 @@ import { RECEIVE_POSTS } from '../actions'
 import { RECEIVE_POST } from '../actions'
 
 import { combineReducers } from 'redux'
+import { reducer as formReducer } from 'redux-form'
 
 function categories(state = [], action) {
 	switch (action.type) {
@@ -34,5 +35,6 @@ function post(state = {}, action) {
 export default combineReducers({
   categories,
   posts,
-  post
+  post,
+  form: formReducer
 })
