@@ -4,6 +4,18 @@ import { Link } from 'react-router-dom'
 
 class PostList extends Component {
 
+    renderPostList(posts) {
+        return (
+            posts.map((post) => (
+                <li key={post.title} className="collection-item">
+                    <Link to={`/posts/${post.id}`}>
+                        {post.title}
+                    </Link>
+                </li>
+            ))
+        )
+    }
+
     render() {
     	const { posts } = this.props
 
@@ -15,11 +27,7 @@ class PostList extends Component {
             <div>
                 <h3>Posts</h3>
         		<ul className="collection">
-              		{posts.map((post) => (
-                		<li key={post.title} className="collection-item">
-                            <Link to={`/posts/${post.id}`}>{post.title}</Link>
-                        </li>
-                	))}
+                    {this.renderPostList(posts)}
             	</ul>
             </div>
        )
