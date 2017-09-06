@@ -1,3 +1,5 @@
+import uuidv1 from 'uuid'
+
 const api = process.env.REACT_APP_READABLE_API_URL || 'http://localhost:5001'
 
 let token = localStorage.token
@@ -28,8 +30,27 @@ export const getPost = (id) => {
 		.then(data => data)
 }
 
-export const savePost = (post) => {
-	return fetch(`${api}/posts`, { post, headers })
-		.then(res => res.json())
-		.then(data => data)
+export const savePost = (params) => {
+
+	const post = {
+        id: uuidv1(),
+        timestamp: Date.now(),
+        title: 'Announcing 60,000 Challenge Scholarships from Udacity and Google',
+        body: 'Udacity and Google share a commitment to increasing learning opportunities for deserving students across the globe, and this mission has been the cornerstone of our partnership from the start. Most recently, we launched an ambitious scholarship initiative across Europe for aspiring Android developers. As a result, thousands of students earned the opportunity to master job-ready skills.',
+        owner: 'Stuart Frye',
+        category: 'udacity'
+    }
+
+    console.log(post)
+
+	return fetch(`${api}/posts`, {
+		method: 'POST',
+		headers: {
+			...headers,
+			  'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(post)
+	})
+	.then(res => res.json())
+	.then(data => data)
 }

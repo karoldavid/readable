@@ -1,7 +1,7 @@
 import { RECEIVE_CATEGORIES } from '../actions'
 import { RECEIVE_POSTS } from '../actions'
 import { RECEIVE_POST } from '../actions'
-import { SAVE_POST }
+import { SAVE_POST } from '../actions'
 
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'

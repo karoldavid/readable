@@ -15,8 +15,8 @@ class NewPost extends Component {
 	    )
 	}
 
-	handleFormSubmit(values) {
-		console.log(values)
+	handleFormSubmit(params) {
+		this.props.savePost(params)
 	}
 
 	render() {
@@ -58,12 +58,12 @@ class NewPost extends Component {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		savePost: (post) => dispatch(savePost(post))
+		savePost: (params) => dispatch(savePost(params))
 	}
 }
 
 export default reduxForm({
 	form: 'NewPostForm'
 })(
-	connect(null, null)(NewPost)
+	connect(null, mapDispatchToProps)(NewPost)
 )
