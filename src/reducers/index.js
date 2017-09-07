@@ -2,7 +2,8 @@ import { RECEIVE_CATEGORIES } from '../actions'
 import { RECEIVE_POSTS } from '../actions'
 import { RECEIVE_POST } from '../actions'
 import { SAVE_POST } from '../actions'
-
+import { DELETE_POST } from '../actions'
+ 
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 
@@ -30,6 +31,9 @@ function post(state = {}, action) {
 			return action.post
 		case SAVE_POST:
 			console.log("SAVE_POST")
+			return state
+		case DELETE_POST:
+			console.log("DELETE_POST")
 			return state
 		default:
 			return state

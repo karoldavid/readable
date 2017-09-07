@@ -38,7 +38,7 @@ export const savePost = (data) => {
         title: data.title,
         body: data.body,
         owner: data.author,
-        category: data.category
+        category: data.categoryg
     }
 
 	return fetch(`${api}/posts`, {
@@ -51,4 +51,15 @@ export const savePost = (data) => {
 	})
 	.then(res => res.json())
 	.then(data => data)
+}
+
+export const deletePost = (id) => {
+	return fetch(`${api}/posts/${id}`, {
+		method: 'DELETE',
+		headers: {
+			...headers,
+			'Content-Type': 'application/json'
+		}})
+		.then(res => res.json())
+		.then(data => data)
 }

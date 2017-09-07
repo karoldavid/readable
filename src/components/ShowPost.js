@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchPost } from '../actions'
+import { fetchPost, removePost } from '../actions'
 import { Link } from 'react-router-dom'
 
 class ShowPost extends Component {
 	componentDidMount() {
 		const { id } = this.props.match.params
 		this.props.getPost(id)
+	}
+
+	onDelete() {
+		const { id } = this.props.post
+		console.log(id)
+		this.props.deletePost(id)
 	}
 
 	showPost(post) {
@@ -16,6 +22,7 @@ class ShowPost extends Component {
 				<p>{post.category} {post.author} {post.voteScore}</p>
 				<p>{post.body}</p>
 				<Link to="/"><button className="btn waves-effect waves-light">Back to Main</button></Link>
+				<button onClick={this.onDelete.bind(this)} className="btn waves-effect waves-light">Delete Post</button>
 			</div>
 		)
 	}
@@ -39,7 +46,8 @@ function mapStateToProps({ post }) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		getPost: (id) => dispatch(fetchPost(id))
+		getPost: (id) => dispatch(fetchPost(id)),
+		deletePost: (id) => dispatch(removePost(id))
 	}
 }
 
