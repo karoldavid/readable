@@ -53,7 +53,7 @@ export const savePost = (post, callback) => dispatch => (
 
 export const deletePost = id => ({
 	type: DELETE_POST,
-	id
+	payload: id
 })
 
 export const removePost = (id, callback) => dispatch => (

@@ -59,6 +59,7 @@ export const deletePost = (id) => {
 		headers: {
 			...headers,
 			'Content-Type': 'application/json'
-		}})
-		.then(res => res)
+		}
+	})
+	.then(res => res)
 }

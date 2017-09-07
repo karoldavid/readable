@@ -22,19 +22,19 @@ function posts(state = [], action) {
 			return action.posts
 		case SAVE_POST:
 			return state.concat(action.post)
+		case DELETE_POST:
+		    const url = action.payload.url
+		    const id = url.substr(url.indexOf("posts/") + ("posts/".length))
+			return state.filter((post) => id !== post.id)
 		default:
 			return state
 	}
 }
 
 function post(state = {}, action) {
-	console.log(action.type);
 	switch (action.type) {
 		case RECEIVE_POST:
 			return action.post
-		case DELETE_POST:
-			console.log("DELETE_POST")
-			return state
 		default:
 			return state
 	}
