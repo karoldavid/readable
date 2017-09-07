@@ -57,6 +57,7 @@ class NewPost extends Component {
 					 <button type="submit" className="btn waves-effect waves-light">
 						Save Post
   					</button>
+  					<Link to="/"><button className="btn waves-effect waves-light">Cancel</button></Link>
 				</form>
 			</div>
 		)
