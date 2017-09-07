@@ -56,8 +56,9 @@ export const deletePost = id => dispatch => ({
 	id
 })
 
-export const removePost = (id) => dispatch => (
+export const removePost = (id, callback) => dispatch => (
 	ReadableAPI
 	.deletePost(id)
 	.then(id => dispatch(deletePost(id)))
+	.then(() => callback())
 )

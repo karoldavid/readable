@@ -12,7 +12,9 @@ class ShowPost extends Component {
 	onDelete() {
 		const { id } = this.props.post
 		console.log(id)
-		this.props.deletePost(id)
+		this.props.deletePost(id, () => {
+			this.props.history.push('/')
+		})
 	}
 
 	showPost(post) {
@@ -47,7 +49,7 @@ function mapStateToProps({ post }) {
 function mapDispatchToProps(dispatch) {
 	return {
 		getPost: (id) => dispatch(fetchPost(id)),
-		deletePost: (id) => dispatch(removePost(id))
+		deletePost: (id, callback) => dispatch(removePost(id, callback))
 	}
 }
 
