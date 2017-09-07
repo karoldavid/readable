@@ -17,7 +17,9 @@ class NewPost extends Component {
 	}
 
 	handleFormSubmit(params) {
-		this.props.savePost(params)
+		this.props.savePost(params, () => {
+			this.props.history.push('/')
+		})
 	}
 
 	render() {
@@ -67,7 +69,7 @@ class NewPost extends Component {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		savePost: (params) => dispatch(savePost(params))
+		savePost: (params, callback) => dispatch(savePost(params, callback))
 	}
 }
 

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 class PostList extends Component {
 
     renderPostList(posts) {
+
         return (
             posts.map((post) => (
                 <li key={post.title} className="collection-item">

@@ -44,10 +44,11 @@ export const submitPost = post => dispatch => ({
 	post
 })
 
-export const savePost = (post) => dispatch => (
+export const savePost = (post, callback) => dispatch => (
 	ReadableAPI
 	.savePost(post)
 	.then(post => dispatch(submitPost(post)))
+	.then(() => callback())
 )
 
 export const deletePost = id => dispatch => ({
