@@ -34,8 +34,7 @@ function post(state = {}, action) {
 			return state
 		case DELETE_POST:
 			console.log("DELETE_POST")
-			console.log(state)
-			return state
+			return 
 		default:
 			return state
 	}
