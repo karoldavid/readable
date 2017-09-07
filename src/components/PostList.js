@@ -6,9 +6,11 @@ class PostList extends Component {
 
     renderPostList(posts) {
 
+        const notDeleted = posts.filter(post => !post.deleted )
+
         return (
-            posts.map((post) => (
-                <li key={post.title} className="collection-item">
+            notDeleted.map((post) => (
+                <li key={post.id} className="collection-item">
                     <Link to={`/posts/${post.id}`}>
                         {post.title}
                     </Link>
