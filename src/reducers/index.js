@@ -20,6 +20,8 @@ function posts(state = [], action) {
 	switch (action.type) {
 		case RECEIVE_POSTS:
 			return action.posts
+		case SAVE_POST:
+			return state.concat(action.post)
 		default:
 			return state
 	}
@@ -30,9 +32,6 @@ function post(state = {}, action) {
 	switch (action.type) {
 		case RECEIVE_POST:
 			return action.post
-		case SAVE_POST:
-			console.log("SAVE_POST")
-			return state
 		case DELETE_POST:
 			console.log("DELETE_POST")
 			return state
