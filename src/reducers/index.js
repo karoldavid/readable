@@ -26,6 +26,7 @@ function posts(state = [], action) {
 }
 
 function post(state = {}, action) {
+	console.log(action.type);
 	switch (action.type) {
 		case RECEIVE_POST:
 			return action.post
@@ -34,7 +35,7 @@ function post(state = {}, action) {
 			return state
 		case DELETE_POST:
 			console.log("DELETE_POST")
-			return 
+			return state
 		default:
 			return state
 	}

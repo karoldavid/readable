@@ -39,7 +39,7 @@ export const fetchPost = (id) => dispatch => (
 		.then(post => dispatch(receivePost(post)))
 )
 
-export const submitPost = post => dispatch => ({
+export const submitPost = post => ({
 	type: SAVE_POST,
 	post
 })
@@ -51,7 +51,7 @@ export const savePost = (post, callback) => dispatch => (
 	.then(() => callback())
 )
 
-export const deletePost = id => dispatch => ({
+export const deletePost = id => ({
 	type: DELETE_POST,
 	id
 })
