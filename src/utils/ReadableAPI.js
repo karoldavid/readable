@@ -64,11 +64,11 @@ export const deletePost = (id) => {
 	.then(res => res)
 }
 
-export const saveModifications = (data) => {
+export const saveModifications = (data, callback) => {
 	const post = {
         title: data.title,
         body: data.body,
-        owner: data.author,
+        author: data.author,
         category: data.category
     }
     const id = data.id
@@ -83,4 +83,5 @@ export const saveModifications = (data) => {
 	})
 	.then(res => res.json())
 	.then(data => data)
+	.then(() => callback())
 }

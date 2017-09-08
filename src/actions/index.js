@@ -69,8 +69,8 @@ export const putPost = post => ({
 	payload: post
 })
 
-export const saveModifications = (post) => dispatch => {
+export const saveModifications = (post, callback) => dispatch => {
 	ReadableAPI
-	.saveModifications(post)
+	.saveModifications(post, callback)
 	.then(post => dispatch(putPost(post)))
 }

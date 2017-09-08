@@ -35,7 +35,9 @@ class EditPost extends Component {
 		const { id } = this.props.post
 		console.log(params)
 		params.id = id
-		this.props.saveModifications(params)
+		this.props.saveModifications(params, () => {
+			this.props.history.push('/')
+		})
 	}
 
 	render() {
@@ -87,7 +89,7 @@ function mapStateToProps( { post }) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		saveModifications: (params) => dispatch(saveModifications(params))
+		saveModifications: (params, callback) => dispatch(saveModifications(params, callback))
 	}
 }
 
