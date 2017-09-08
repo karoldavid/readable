@@ -33,7 +33,6 @@ class EditPost extends Component {
 
 	handleFormSubmit(params) {
 		const { id } = this.props.post
-		console.log(params)
 		params.id = id
 		this.props.saveModifications(params, () => {
 			this.props.history.push('/')

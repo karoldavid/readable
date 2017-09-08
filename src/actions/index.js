@@ -71,6 +71,7 @@ export const putPost = post => ({
 
 export const saveModifications = (post, callback) => dispatch => {
 	ReadableAPI
-	.saveModifications(post, callback)
+	.saveModifications(post)
 	.then(post => dispatch(putPost(post)))
+	.then(() => callback())
 }

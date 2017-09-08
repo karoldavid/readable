@@ -64,7 +64,7 @@ export const deletePost = (id) => {
 	.then(res => res)
 }
 
-export const saveModifications = (data, callback) => {
+export const saveModifications = (data) => {
 	const post = {
         title: data.title,
         body: data.body,
@@ -83,5 +83,4 @@ export const saveModifications = (data, callback) => {
 	})
 	.then(res => res.json())
 	.then(data => data)
-	.then(() => callback())
 }
