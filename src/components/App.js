@@ -25,7 +25,7 @@ class App extends Component {
         <Switch>
           <Route path="/category/:cat" component={Category}/>
           <Route path="/posts/new" component={NewPost}/>
-          <Route path="/posts/edit" component={EditPost}/>
+          <Route path="/posts/:id/edit" component={EditPost}/>
           <Route path="/posts/:id" component={ShowPost}/>
           <Route exact path="/" render={() => (
             <div>

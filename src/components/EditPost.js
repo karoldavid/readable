@@ -12,4 +12,8 @@ class EditPost extends Component {
 	}
 }
 
+function dispatchStateToProps( { post }) {
+	return { post }
+}
+
 export default EditPost
