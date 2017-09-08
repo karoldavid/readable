@@ -24,6 +24,7 @@ class ShowPost extends Component {
 				<p>{post.category} {post.author} {post.voteScore}</p>
 				<p>{post.body}</p>
 				<Link to="/"><button className="btn waves-effect waves-light">Back to Main</button></Link>
+				<Link to="/edit"><button className="btn waves-effect waves-light">Edit Post</button></Link>
 				<button onClick={this.onDelete.bind(this)} className="btn waves-effect waves-light">Delete Post</button>
 			</div>
 		)
