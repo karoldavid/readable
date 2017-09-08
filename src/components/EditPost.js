@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm, initialize } from 'redux-form'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { saveModifications } from '../actions'
 
 class EditPost extends Component {
 
@@ -31,7 +32,10 @@ class EditPost extends Component {
 	}
 
 	handleFormSubmit(params) {
+		const { id } = this.props.post
 		console.log(params)
+		params.id = id
+		this.props.saveModifications(params)
 	}
 
 	render() {
@@ -81,8 +85,14 @@ function mapStateToProps( { post }) {
 	return { post }
 }
 
+function mapDispatchToProps(dispatch) {
+	return {
+		saveModifications: (params) => dispatch(saveModifications(params))
+	}
+}
+
 export default reduxForm({
 	form: 'EditPostForm'
 })(
-	connect(mapStateToProps, null)(EditPost)
+	connect(mapStateToProps, mapDispatchToProps)(EditPost)
 )

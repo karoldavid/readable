@@ -1,8 +1,11 @@
-import { RECEIVE_CATEGORIES } from '../actions'
-import { RECEIVE_POSTS } from '../actions'
-import { RECEIVE_POST } from '../actions'
-import { SAVE_POST } from '../actions'
-import { DELETE_POST } from '../actions'
+import {
+	RECEIVE_CATEGORIES,
+	RECEIVE_POSTS,
+	RECEIVE_POST,
+	SAVE_POST,
+	DELETE_POST,
+	SAVE_MODIFICATIONS
+} from '../actions'
  
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
@@ -26,6 +29,9 @@ function posts(state = [], action) {
 		    const url = action.payload.url
 		    const id = url.substr(url.indexOf("posts/") + ("posts/".length))
 			return state.filter((post) => id !== post.id)
+		case SAVE_MODIFICATIONS:
+			console.log(action)
+			return state
 		default:
 			return state
 	}

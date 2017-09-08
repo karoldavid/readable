@@ -63,3 +63,24 @@ export const deletePost = (id) => {
 	})
 	.then(res => res)
 }
+
+export const saveModifications = (data) => {
+	const post = {
+        title: data.title,
+        body: data.body,
+        owner: data.author,
+        category: data.category
+    }
+    const id = data.id
+
+	return fetch(`${api}/posts/${id}`, {
+		method:'PUT',
+		headers: {
+			...headers,
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(post)
+	})
+	.then(res => res.json())
+	.then(data => data)
+}

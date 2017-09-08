@@ -5,6 +5,7 @@ export const RECEIVE_POSTS = "RECEIVE_POSTS";
 export const RECEIVE_POST = "RECEIVE_POST"
 export const SAVE_POST = "SAVE_POST"
 export const DELETE_POST = "DELETE_POST"
+export const SAVE_MODIFICATIONS = "SAVE_MODIFICATIONS"
 
 export const receiveCategories = categories => ({
   type: RECEIVE_CATEGORIES,
@@ -62,3 +63,14 @@ export const removePost = (id, callback) => dispatch => (
 	.then(id => dispatch(deletePost(id)))
 	.then(() => callback())
 )
+
+export const putPost = post => ({
+	type: SAVE_MODIFICATIONS,
+	payload: post
+})
+
+export const saveModifications = (post) => dispatch => {
+	ReadableAPI
+	.saveModifications(post)
+	.then(post => dispatch(putPost(post)))
+}
