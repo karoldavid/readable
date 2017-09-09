@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 import { Field, reduxForm } from 'redux-form'
-import { fetchPost, removePost, addComment } from '../actions'
+import { fetchPost, removePost, addComment, fetchComments } from '../actions'
 import { Link } from 'react-router-dom'
 
 const customStyles = {
@@ -25,6 +25,7 @@ class ShowPost extends Component {
 	componentDidMount() {
 		const { id } = this.props.match.params
 		this.props.getPost(id)
+		this.props.getComments(id)
 	}
 
 	onDelete() {
@@ -143,7 +144,8 @@ function mapDispatchToProps(dispatch) {
 	return {
 		getPost: (id) => dispatch(fetchPost(id)),
 		deletePost: (id, callback) => dispatch(removePost(id, callback)),
-		addComment: (comment) => dispatch(addComment(comment))
+		addComment: (comment) => dispatch(addComment(comment)),
+		getComments: (id) => dispatch(fetchComments(id))
 	}
 }
 

@@ -106,3 +106,9 @@ export const addComment = (data) => {
 	.then(res => res.json())
 	.then(data => data)
 }
+
+export const getPostComments = (id) => {
+	return fetch(`${api}/posts/${id}/comments`, {headers})
+		.then(res => res.json())
+		.then(data => data)
+}

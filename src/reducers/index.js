@@ -5,7 +5,8 @@ import {
 	SAVE_POST,
 	DELETE_POST,
 	SAVE_MODIFICATIONS,
-	ADD_COMMENT
+	ADD_COMMENT,
+	GET_COMMENTS
 } from '../actions'
  
 import { combineReducers } from 'redux'
@@ -49,6 +50,8 @@ function post(state = {}, action) {
 function comments(state = [], action) {
 	switch (action.type) {
 		case ADD_COMMENT:
+			return state
+		case GET_COMMENTS:
 			return state
 		default:
 			return state
