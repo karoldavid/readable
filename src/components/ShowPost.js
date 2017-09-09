@@ -17,6 +17,10 @@ class ShowPost extends Component {
 		})
 	}
 
+	onAddComment() {
+		console.log("add comment button clicked")
+	}
+
 	showPost(post) {
 		return(
 			<div>
@@ -26,6 +30,7 @@ class ShowPost extends Component {
 				<Link to="/"><button className="btn waves-effect waves-light">Back to Main</button></Link>
 				<Link to={{ pathname: `/posts/${post.id}/edit`}}><button className="btn waves-effect waves-light">Edit Post</button></Link>
 				<button onClick={this.onDelete.bind(this)} className="btn waves-effect waves-light">Delete Post</button>
+				<button onClick={this.onAddComment.bind(this)} className="btn waves-effect waves-light">Add Comment</button>
 			</div>
 		)
 	}
