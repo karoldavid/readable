@@ -30,7 +30,7 @@ class ShowPost extends Component {
 
 	onDelete() {
 		const { id } = this.props.post
-		console.log(id)
+
 		this.props.deletePost(id, () => {
 			this.props.history.push('/')
 		})
@@ -55,7 +55,6 @@ class ShowPost extends Component {
 	}
 
 	showComments(comment) {
-		console.log(comment)
 		return(
 			<div>
 				<li className="collection-item" key={comment.id}>
@@ -99,11 +98,11 @@ class ShowPost extends Component {
 
 	render() {
 		const { post, comments, handleSubmit } = this.props
-		console.log(this.props)
 
 		if (!post) {
 			return <div>Loading post...</div>
 		}
+		
 		return(
 			<div>
 				{this.showPost(post)}

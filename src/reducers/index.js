@@ -50,7 +50,7 @@ function post(state = {}, action) {
 function comments(state = [], action) {
 	switch (action.type) {
 		case ADD_COMMENT:
-			return state
+			return state.concat(action.comment)
 		case GET_COMMENTS:
 			return action.comments
 		default:
