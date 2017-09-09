@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
-import Loading from 'react-loading'
+import { Field, reduxForm } from 'redux-form'
 import { fetchPost, removePost } from '../actions'
 import { Link } from 'react-router-dom'
 
@@ -59,15 +59,30 @@ class ShowPost extends Component {
 	    this.setState(() => ({
 	      modalOpen: true
 	    }))
-	 }
-	 closeModal = () => {
+	}
+
+	closeModal = () => {
 	    this.setState(() => ({
 	      modalOpen: false
 	    }))
 	}
 
+	renderField(field) {
+		return (
+	    	<div>
+	      		<label>{field.input.label}</label>
+	      		<input {...field.input}/>
+	      		{field.touched && field.error && <div className="error">{field.error}</div>}
+	    	</div>
+	    )
+	}
+
+	handleFormSubmit(params) {
+		console.log(params)
+	}
+
 	render() {
-		const { post } = this.props
+		const { post, handleSubmit } = this.props
 
 		if (!post) {
 			return <div>Loading post... </div>
@@ -86,6 +101,24 @@ class ShowPost extends Component {
 		        >
 		        	<div className="modal-content">
 		        		<h4>Add A Comment</h4>
+
+		        		<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+							<Field
+								name="body"
+								type="text"
+								label="Your Comment"
+								className="input-field"
+								component={this.renderField}
+							/>
+							<Field
+								name="author"
+								type="text"
+								label="Your Name"
+								className="input-field"
+								component={this.renderField}
+							/>
+							<button type="submit" className="btn waves-effect waves-light">Save Comment</button>
+						</form>
       					
 		        		 <button
 		        		 	className="btn waves-effect waves-light"
@@ -110,4 +143,8 @@ function mapDispatchToProps(dispatch) {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShowPost) 
+export default reduxForm({
+	form: 'EditPostForm'
+})(
+	connect(mapStateToProps, mapDispatchToProps)(ShowPost)
+)
