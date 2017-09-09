@@ -60,7 +60,9 @@ class ShowPost extends Component {
 				<li className="collection-item" key={comment.id}>
 					<p>Text: {comment.body}</p>
 					<p>Author {comment.author}</p>
-					<p>Votes: {comment.voteScore}</p> 
+					<p>Votes: {comment.voteScore}</p>
+					<button className="btn waves-effect waves-light">Edit</button>
+					<button onClick={this.onDelete.bind(this)} className="btn waves-effect waves-light">Delete</button>
 				</li>
 			</div>
 		)
@@ -102,7 +104,7 @@ class ShowPost extends Component {
 		if (!post) {
 			return <div>Loading post...</div>
 		}
-		
+
 		return(
 			<div>
 				{this.showPost(post)}
