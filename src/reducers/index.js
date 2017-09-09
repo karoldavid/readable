@@ -52,7 +52,7 @@ function comments(state = [], action) {
 		case ADD_COMMENT:
 			return state
 		case GET_COMMENTS:
-			return state
+			return action.comments
 		default:
 			return state
 	}

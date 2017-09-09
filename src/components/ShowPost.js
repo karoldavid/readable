@@ -54,6 +54,19 @@ class ShowPost extends Component {
 		)
 	}
 
+	showComments(comment) {
+		console.log(comment)
+		return(
+			<div>
+				<li className="collection-item" key={comment.id}>
+					<p>Text: {comment.body}</p>
+					<p>Author {comment.author}</p>
+					<p>Votes: {comment.voteScore}</p> 
+				</li>
+			</div>
+		)
+	}
+
 	openModal = () => {
 	    this.setState(() => ({
 	      modalOpen: true
@@ -78,25 +91,27 @@ class ShowPost extends Component {
 
 	handleFormSubmit(params) {
 		const { id } = this.props.post
-
 		params.postId = id
 
 		this.props.addComment(params)
-
 		this.closeModal()
 	}
 
 	render() {
-		const { post, handleSubmit } = this.props
+		const { post, comments, handleSubmit } = this.props
+		console.log(this.props)
 
 		if (!post) {
-			return <div>Loading post... </div>
+			return <div>Loading post...</div>
 		}
-
 		return(
 			<div>
-				{ this.showPost(post) }
-				
+				{this.showPost(post)}
+
+				<ul className="collection">
+				 	{ comments.map(comment => this.showComments(comment))}
+
+				</ul>
 				<Modal
 		          isOpen={this.state.modalOpen}
 		          onRequestClose={this.closeModal}
@@ -136,8 +151,8 @@ class ShowPost extends Component {
 	}
 }
 
-function mapStateToProps({ post }) {
-	return { post }
+function mapStateToProps({ post, comments }) {
+	return { post, comments }
 }
 
 function mapDispatchToProps(dispatch) {
