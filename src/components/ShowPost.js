@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 import { Field, reduxForm } from 'redux-form'
-import { fetchPost, removePost } from '../actions'
+import { fetchPost, removePost, addComment } from '../actions'
 import { Link } from 'react-router-dom'
 
 const customStyles = {
@@ -36,8 +36,6 @@ class ShowPost extends Component {
 	}
 
 	onAddComment() {
-		console.log("add comment button clicked")
-
 		this.openModal()
 	}
 
@@ -78,7 +76,11 @@ class ShowPost extends Component {
 	}
 
 	handleFormSubmit(params) {
-		console.log(params)
+		const { id } = this.props.post
+
+		params.postId = id
+
+		this.props.addComment(params)
 	}
 
 	render() {
@@ -88,7 +90,6 @@ class ShowPost extends Component {
 			return <div>Loading post... </div>
 		}
 
-		console.log(this.state.modalOpen)
 		return(
 			<div>
 				{ this.showPost(post) }
@@ -139,7 +140,8 @@ function mapStateToProps({ post }) {
 function mapDispatchToProps(dispatch) {
 	return {
 		getPost: (id) => dispatch(fetchPost(id)),
-		deletePost: (id, callback) => dispatch(removePost(id, callback))
+		deletePost: (id, callback) => dispatch(removePost(id, callback)),
+		addComment: (comment) => dispatch(addComment(comment))
 	}
 }
 

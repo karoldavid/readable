@@ -38,7 +38,7 @@ export const savePost = (data) => {
         title: data.title,
         body: data.body,
         owner: data.author,
-        category: data.categoryg
+        category: data.category
     }
 
 	return fetch(`${api}/posts`, {
@@ -80,6 +80,28 @@ export const saveModifications = (data) => {
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify(post)
+	})
+	.then(res => res.json())
+	.then(data => data)
+}
+
+export const addComment = (data) => {
+
+	const comment = {
+        id: uuidv1(),
+        timestamp: Date.now(),
+        body: data.body,
+        owner: data.author,
+        parentId: data.postId
+    }
+
+	return fetch(`${api}/comments`, {
+		method: 'POST',
+		headers: {
+			...headers,
+			  'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(comment)
 	})
 	.then(res => res.json())
 	.then(data => data)

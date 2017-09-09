@@ -6,6 +6,7 @@ export const RECEIVE_POST = "RECEIVE_POST"
 export const SAVE_POST = "SAVE_POST"
 export const DELETE_POST = "DELETE_POST"
 export const SAVE_MODIFICATIONS = "SAVE_MODIFICATIONS"
+export const ADD_COMMENT = "ADD_COMMENT"
 
 export const receiveCategories = categories => ({
   type: RECEIVE_CATEGORIES,
@@ -75,3 +76,14 @@ export const saveModifications = (post, callback) => dispatch => {
 	.then(post => dispatch(putPost(post)))
 	.then(() => callback())
 }
+
+export const submitComment = comment => ({
+	type: ADD_COMMENT,
+	comment
+})
+
+export const addComment = comment => dispatch => (
+	ReadableAPI
+	.addComment(comment)
+	.then(comment => dispatch(submitComment(comment)))
+)
