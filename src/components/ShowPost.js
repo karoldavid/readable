@@ -1,9 +1,27 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Modal from 'react-modal'
+import Loading from 'react-loading'
 import { fetchPost, removePost } from '../actions'
 import { Link } from 'react-router-dom'
 
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+}
+
 class ShowPost extends Component {
+
+	state = {
+	    modalOpen: false
+  	}
+
 	componentDidMount() {
 		const { id } = this.props.match.params
 		this.props.getPost(id)
@@ -19,6 +37,8 @@ class ShowPost extends Component {
 
 	onAddComment() {
 		console.log("add comment button clicked")
+
+		this.openModal()
 	}
 
 	showPost(post) {
@@ -35,6 +55,17 @@ class ShowPost extends Component {
 		)
 	}
 
+	openModal = () => {
+	    this.setState(() => ({
+	      modalOpen: true
+	    }))
+	 }
+	 closeModal = () => {
+	    this.setState(() => ({
+	      modalOpen: false
+	    }))
+	}
+
 	render() {
 		const { post } = this.props
 
@@ -42,8 +73,28 @@ class ShowPost extends Component {
 			return <div>Loading post... </div>
 		}
 
+		console.log(this.state.modalOpen)
 		return(
-			<div>{ this.showPost(post) }</div>
+			<div>
+				{ this.showPost(post) }
+				
+				<Modal
+		          isOpen={this.state.modalOpen}
+		          onRequestClose={this.closeModal}
+		          contentLabel='Modal'
+		          style={customStyles}
+		        >
+		        	<div className="modal-content">
+		        		<h4>Add A Comment</h4>
+      					
+		        		 <button
+		        		 	className="btn waves-effect waves-light"
+                      		onClick={this.closeModal}>Cancel
+                        </button>
+		        	</div>
+		         
+		        </Modal>
+		    </div>
 		)
 	}
 }
