@@ -81,6 +81,8 @@ class ShowPost extends Component {
 		params.postId = id
 
 		this.props.addComment(params)
+
+		this.closeModal()
 	}
 
 	render() {
