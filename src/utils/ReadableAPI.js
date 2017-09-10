@@ -37,7 +37,7 @@ export const savePost = (data) => {
         timestamp: Date.now(),
         title: data.title,
         body: data.body,
-        owner: data.author,
+        author: data.author,
         category: data.category
     }
 

@@ -61,8 +61,10 @@ class ShowPost extends Component {
 			<div>
 				<Link to="/"><button className="btn waves-effect waves-light">Back to Main</button></Link>
 				<h3>{post.title}</h3>
-				<p>{post.category} {post.author} {post.voteScore}</p>
+				<p>Category: {post.category}</p>
 				<p>{post.body}</p>
+				<p>Author: {post.author}</p>
+				<p>Vote Score: {post.voteScore}</p>
 				<Link to={{ pathname: `/posts/${post.id}/edit`}}><button className="btn waves-effect waves-light">Edit Post</button></Link>
 				<button onClick={this.onDelete.bind(this)} className="btn waves-effect waves-light">Delete Post</button>
 				<button onClick={this.onAddComment.bind(this)} className="btn waves-effect waves-light">Add Comment</button>
