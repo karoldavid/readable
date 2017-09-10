@@ -91,7 +91,7 @@ export const addComment = (data) => {
         id: uuidv1(),
         timestamp: Date.now(),
         body: data.body,
-        owner: data.author,
+        author: data.author,
         parentId: data.postId
     }
 

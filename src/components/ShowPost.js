@@ -64,7 +64,7 @@ class ShowPost extends Component {
 			<div>
 				<li className="collection-item" key={comment.id}>
 					<p>Text: {comment.body}</p>
-					<p>Author {comment.author}</p>
+					<p>Author: {comment.author}</p>
 					<p>Votes: {comment.voteScore}</p>
 					<button className="btn waves-effect waves-light">Edit</button>
 					<button onClick={() => this.onDeleteComment(comment)} className="btn waves-effect waves-light">Delete</button>
