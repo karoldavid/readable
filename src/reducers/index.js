@@ -60,7 +60,7 @@ function comments(state = [], action) {
 		    const id = url.substr(url.indexOf("comments/") + ("comments/".length))
 			return state.filter((comment) => id !== comment.id)
 		case SAVE_MOD_COMMENT:
-			return state
+			return state.map((comment) => comment.id === action.payload.id ? action.payload : comment);
 		default:
 			return state
 	}

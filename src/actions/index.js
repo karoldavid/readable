@@ -115,7 +115,7 @@ export const deleteComment = id => dispatch => (
 
 export const putComment = comment => ({
 	type: SAVE_MOD_COMMENT,
-	comment
+	payload: comment
 })
 
 export const saveModifiedComment = comment => dispatch => (
