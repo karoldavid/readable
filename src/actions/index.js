@@ -8,6 +8,7 @@ export const DELETE_POST = "DELETE_POST"
 export const SAVE_MODIFICATIONS = "SAVE_MODIFICATIONS"
 export const ADD_COMMENT = "ADD_COMMENT"
 export const GET_COMMENTS = "GET_COMMENTS"
+export const DELETE_COMMENT = "DELETE_COMMENT"
 
 export const receiveCategories = categories => ({
   type: RECEIVE_CATEGORIES,
@@ -98,4 +99,15 @@ export const fetchComments = id => dispatch => (
 	ReadableAPI
 	.getPostComments(id)
 	.then(comments => dispatch(receiveComments(comments)))
+)
+
+export const removeComment = id => ({
+	type: DELETE_COMMENT,
+	id
+})
+
+export const deleteComment = id => dispatch => (
+	ReadableAPI
+	.deleteComment(id)
+	.then(id => dispatch(removeComment(id)))
 )

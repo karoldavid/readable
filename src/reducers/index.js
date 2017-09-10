@@ -6,7 +6,8 @@ import {
 	DELETE_POST,
 	SAVE_MODIFICATIONS,
 	ADD_COMMENT,
-	GET_COMMENTS
+	GET_COMMENTS,
+	DELETE_COMMENT
 } from '../actions'
  
 import { combineReducers } from 'redux'
@@ -53,6 +54,10 @@ function comments(state = [], action) {
 			return state.concat(action.comment)
 		case GET_COMMENTS:
 			return action.comments
+		case DELETE_COMMENT:
+			//console.log("DELETE hCOMMENT")
+			//console.log(action)
+			return state
 		default:
 			return state
 	}

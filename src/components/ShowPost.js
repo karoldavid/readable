@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 import { Field, reduxForm } from 'redux-form'
-import { fetchPost, removePost, addComment, fetchComments } from '../actions'
+import { fetchPost, removePost, addComment, fetchComments, deleteComment } from '../actions'
 import { Link } from 'react-router-dom'
 
 const customStyles = {
@@ -40,13 +40,18 @@ class ShowPost extends Component {
 		this.openModal()
 	}
 
+	onDeleteComment(comment) {
+		const { id } = comment
+		this.props.deleteComment(id)
+	}
+
 	showPost(post) {
 		return(
 			<div>
+				<Link to="/"><button className="btn waves-effect waves-light">Back to Main</button></Link>
 				<h3>{post.title}</h3>
 				<p>{post.category} {post.author} {post.voteScore}</p>
 				<p>{post.body}</p>
-				<Link to="/"><button className="btn waves-effect waves-light">Back to Main</button></Link>
 				<Link to={{ pathname: `/posts/${post.id}/edit`}}><button className="btn waves-effect waves-light">Edit Post</button></Link>
 				<button onClick={this.onDelete.bind(this)} className="btn waves-effect waves-light">Delete Post</button>
 				<button onClick={this.onAddComment.bind(this)} className="btn waves-effect waves-light">Add Comment</button>
@@ -62,7 +67,7 @@ class ShowPost extends Component {
 					<p>Author {comment.author}</p>
 					<p>Votes: {comment.voteScore}</p>
 					<button className="btn waves-effect waves-light">Edit</button>
-					<button onClick={this.onDelete.bind(this)} className="btn waves-effect waves-light">Delete</button>
+					<button onClick={() => this.onDeleteComment(comment)} className="btn waves-effect waves-light">Delete</button>
 				</li>
 			</div>
 		)
@@ -161,7 +166,8 @@ function mapDispatchToProps(dispatch) {
 		getPost: (id) => dispatch(fetchPost(id)),
 		deletePost: (id, callback) => dispatch(removePost(id, callback)),
 		addComment: (comment) => dispatch(addComment(comment)),
-		getComments: (id) => dispatch(fetchComments(id))
+		getComments: (id) => dispatch(fetchComments(id)),
+		deleteComment: (id) => dispatch(deleteComment(id))
 	}
 }
 
