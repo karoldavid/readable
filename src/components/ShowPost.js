@@ -114,10 +114,11 @@ class ShowPost extends Component {
 			<div>
 				{this.showPost(post)}
 
+				<p>Number of Comments: {comments.length}</p>
 				<ul className="collection">
 				 	{ comments.map(comment => this.showComments(comment))}
-
 				</ul>
+
 				<Modal
 		          isOpen={this.state.modalOpen}
 		          onRequestClose={this.closeModal}
