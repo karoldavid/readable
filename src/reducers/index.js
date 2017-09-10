@@ -34,7 +34,7 @@ function posts(state = [], action) {
 		    const id = url.substr(url.indexOf("posts/") + ("posts/".length))
 			return state.filter((post) => id !== post.id)
 		case SAVE_MODIFICATIONS:
-			return state.map((post) => post.id === action.payload.id ? action.payload : post);
+			return state.map((post) => post.id === action.payload.id ? action.payload : post)
 		default:
 			return state
 	}

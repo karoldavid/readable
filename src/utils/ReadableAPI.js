@@ -69,7 +69,8 @@ export const saveModifications = (data) => {
         title: data.title,
         body: data.body,
         author: data.author,
-        category: data.category
+        category: data.category,
+        voteScore: data.voteScore
     }
     const id = data.id
 

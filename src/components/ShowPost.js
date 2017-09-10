@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 import { Field, reduxForm, initialize } from 'redux-form'
-import { fetchPost, removePost, addComment, fetchComments, deleteComment, saveModifiedComment } from '../actions'
+import { fetchPost, removePost, saveModifications, addComment, fetchComments, deleteComment, saveModifiedComment } from '../actions'
 import { Link } from 'react-router-dom'
 
 const customStyles = {
@@ -56,6 +56,24 @@ class ShowPost extends Component {
 		this.openEditModal()
 	}
 
+	onVoteScroreIncrement() {
+		const { post } = this.props
+		const { id } = post
+		post.voteScore++
+		this.props.saveModifications(post, () => {
+			this.props.history.push(`/posts/${id}`)
+		})
+	}
+
+	onVoteScroreDecrement() {
+		const { post } = this.props
+		const { id } = post
+		post.voteScore--
+		this.props.saveModifications(post, () => {
+			this.props.history.push(`/posts/${id}`)
+		})
+	}
+
 	showPost(post) {
 		return(
 			<div>
@@ -65,6 +83,10 @@ class ShowPost extends Component {
 				<p>{post.body}</p>
 				<p>Author: {post.author}</p>
 				<p>Vote Score: {post.voteScore}</p>
+				<button onClick={this.onVoteScroreDecrement.bind(this)} className="btn waves-effect waves-light">-</button>
+				<button onClick={this.onVoteScroreIncrement.bind(this)} className="btn waves-effect waves-light">+</button>
+				<br></br>
+				<br></br>
 				<Link to={{ pathname: `/posts/${post.id}/edit`}}><button className="btn waves-effect waves-light">Edit Post</button></Link>
 				<button onClick={this.onDelete.bind(this)} className="btn waves-effect waves-light">Delete Post</button>
 				<button onClick={this.onAddComment.bind(this)} className="btn waves-effect waves-light">Add Comment</button>
@@ -228,6 +250,7 @@ function mapDispatchToProps(dispatch) {
 		getPost: (id) => dispatch(fetchPost(id)),
 		deletePost: (id, callback) => dispatch(removePost(id, callback)),
 		addComment: (comment) => dispatch(addComment(comment)),
+		saveModifications: (params, callback) => dispatch(saveModifications(params, callback)),
 		getComments: (id) => dispatch(fetchComments(id)),
 		deleteComment: (id) => dispatch(deleteComment(id)),
 		saveModifiedComment: (comment) => dispatch(saveModifiedComment(comment))
