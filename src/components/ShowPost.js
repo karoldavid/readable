@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, initialize } from 'redux-form'
 import { fetchPost, removePost, addComment, fetchComments, deleteComment } from '../actions'
 import { Link } from 'react-router-dom'
 
@@ -19,7 +19,8 @@ const customStyles = {
 class ShowPost extends Component {
 
 	state = {
-	    modalOpen: false
+	    modalOpen: false,
+	    editModalOpen: false
   	}
 
 	componentDidMount() {
@@ -45,6 +46,16 @@ class ShowPost extends Component {
 		this.props.deleteComment(id)
 	}
 
+	onEditComment(comment) {
+		const commentData = {
+    		"body": comment.body,
+    		"author": comment.author,
+  		}
+
+  		this.props.initialize(commentData)
+		this.openEditModal()
+	}
+
 	showPost(post) {
 		return(
 			<div>
@@ -66,7 +77,7 @@ class ShowPost extends Component {
 					<p>Text: {comment.body}</p>
 					<p>Author: {comment.author}</p>
 					<p>Votes: {comment.voteScore}</p>
-					<button className="btn waves-effect waves-light">Edit</button>
+					<button onClick={() => this.onEditComment(comment)} className="btn waves-effect waves-light">Edit</button>
 					<button onClick={() => this.onDeleteComment(comment)} className="btn waves-effect waves-light">Delete</button>
 				</li>
 			</div>
@@ -79,9 +90,21 @@ class ShowPost extends Component {
 	    }))
 	}
 
+	openEditModal = () => {
+	    this.setState(() => ({
+	      editModalOpen: true
+	    }))
+	}
+
 	closeModal = () => {
 	    this.setState(() => ({
 	      modalOpen: false
+	    }))
+	}
+
+	closeEditModal = () => {
+	    this.setState(() => ({
+	      editModalOpen: false
 	    }))
 	}
 
@@ -97,10 +120,16 @@ class ShowPost extends Component {
 
 	handleFormSubmit(params) {
 		const { id } = this.props.post
-		params.postId = id
+		params.parentId = id
 
 		this.props.addComment(params)
 		this.closeModal()
+	}
+
+	handleEditFormSubmit(params) {
+		console.log(params)
+
+		this.closeEditModal()
 	}
 
 	render() {
@@ -129,6 +158,41 @@ class ShowPost extends Component {
 		        		<h4>Add A Comment</h4>
 
 		        		<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+							<Field
+								name="body"
+								type="text"
+								label="Your Comment"
+								className="input-field"
+								component={this.renderField}
+							/>
+							<Field
+								name="author"
+								type="text"
+								label="Your Name"
+								className="input-field"
+								component={this.renderField}
+							/>
+							<button type="submit" className="btn waves-effect waves-light">Save Comment</button>
+						</form>
+      					
+		        		 <button
+		        		 	className="btn waves-effect waves-light"
+                      		onClick={this.closeModal}>Cancel
+                        </button>
+		        	</div>
+		         
+		        </Modal>
+
+		        <Modal
+		          isOpen={this.state.editModalOpen}
+		          onRequestClose={this.closeEditModal}
+		          contentLabel='Modal'
+		          style={customStyles}
+		        >
+		        	<div className="modal-content">
+		        		<h4>Edit Comment</h4>
+
+		        		<form onSubmit={handleSubmit(this.handleEditFormSubmit.bind(this))}>
 							<Field
 								name="body"
 								type="text"

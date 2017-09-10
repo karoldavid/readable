@@ -92,7 +92,7 @@ export const addComment = (data) => {
         timestamp: Date.now(),
         body: data.body,
         author: data.author,
-        parentId: data.postId
+        parentId: data.parentId
     }
 
 	return fetch(`${api}/comments`, {
