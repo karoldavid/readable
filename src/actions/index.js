@@ -101,13 +101,13 @@ export const fetchComments = id => dispatch => (
 	.then(comments => dispatch(receiveComments(comments)))
 )
 
-export const removeComment = id => ({
+export const removeComment = comment => ({
 	type: DELETE_COMMENT,
-	id
+	payload: comment
 })
 
 export const deleteComment = id => dispatch => (
 	ReadableAPI
 	.deleteComment(id)
-	.then(id => dispatch(removeComment(id)))
+	.then(comment => dispatch(removeComment(comment)))
 )

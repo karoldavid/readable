@@ -57,7 +57,9 @@ function comments(state = [], action) {
 		case DELETE_COMMENT:
 			//console.log("DELETE hCOMMENT")
 			//console.log(action)
-			return state
+			const url = action.payload.url
+		    const id = url.substr(url.indexOf("comments/") + ("comments/".length))
+			return state.filter((comment) => id !== comment.id)
 		default:
 			return state
 	}
