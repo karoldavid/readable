@@ -123,3 +123,22 @@ export const deleteComment = (id) => {
 	})
 	.then(res => res)
 }
+
+export const saveModifiedComment = (data) => {
+	const comment = {
+        body: data.body,
+        timestamp: Date.now()
+    }
+    const id = data.id
+
+	return fetch(`${api}/comments/${id}`, {
+		method:'PUT',
+		headers: {
+			...headers,
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(comment)
+	})
+	.then(res => res.json())
+	.then(data => data)
+}

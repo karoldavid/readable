@@ -9,6 +9,7 @@ export const SAVE_MODIFICATIONS = "SAVE_MODIFICATIONS"
 export const ADD_COMMENT = "ADD_COMMENT"
 export const GET_COMMENTS = "GET_COMMENTS"
 export const DELETE_COMMENT = "DELETE_COMMENT"
+export const SAVE_MOD_COMMENT = "SAVE_MOD_COMMENT"
 
 export const receiveCategories = categories => ({
   type: RECEIVE_CATEGORIES,
@@ -72,12 +73,12 @@ export const putPost = post => ({
 	payload: post
 })
 
-export const saveModifications = (post, callback) => dispatch => {
+export const saveModifications = (post, callback) => dispatch => (
 	ReadableAPI
 	.saveModifications(post)
 	.then(post => dispatch(putPost(post)))
 	.then(() => callback())
-}
+)
 
 export const submitComment = comment => ({
 	type: ADD_COMMENT,
@@ -110,4 +111,15 @@ export const deleteComment = id => dispatch => (
 	ReadableAPI
 	.deleteComment(id)
 	.then(comment => dispatch(removeComment(comment)))
+)
+
+export const putComment = comment => ({
+	type: SAVE_MOD_COMMENT,
+	comment
+})
+
+export const saveModifiedComment = comment => dispatch => (
+	ReadableAPI
+	.saveModifiedComment(comment)
+	.then(comment => dispatch(putComment(comment)))
 )

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 import { Field, reduxForm, initialize } from 'redux-form'
-import { fetchPost, removePost, addComment, fetchComments, deleteComment } from '../actions'
+import { fetchPost, removePost, addComment, fetchComments, deleteComment, saveModifiedComment } from '../actions'
 import { Link } from 'react-router-dom'
 
 const customStyles = {
@@ -49,7 +49,7 @@ class ShowPost extends Component {
 	onEditComment(comment) {
 		const commentData = {
     		"body": comment.body,
-    		"author": comment.author,
+    		"id": comment.id,
   		}
 
   		this.props.initialize(commentData)
@@ -127,8 +127,10 @@ class ShowPost extends Component {
 	}
 
 	handleEditFormSubmit(params) {
-		console.log(params)
+		const { id } = this.props.post
+		params.parentId = id
 
+		this.props.saveModifiedComment(params)
 		this.closeEditModal()
 	}
 
@@ -200,13 +202,6 @@ class ShowPost extends Component {
 								className="input-field"
 								component={this.renderField}
 							/>
-							<Field
-								name="author"
-								type="text"
-								label="Your Name"
-								className="input-field"
-								component={this.renderField}
-							/>
 							<button type="submit" className="btn waves-effect waves-light">Save Comment</button>
 						</form>
       					
@@ -232,7 +227,8 @@ function mapDispatchToProps(dispatch) {
 		deletePost: (id, callback) => dispatch(removePost(id, callback)),
 		addComment: (comment) => dispatch(addComment(comment)),
 		getComments: (id) => dispatch(fetchComments(id)),
-		deleteComment: (id) => dispatch(deleteComment(id))
+		deleteComment: (id) => dispatch(deleteComment(id)),
+		saveModifiedComment: (comment) => dispatch(saveModifiedComment(comment))
 	}
 }
 

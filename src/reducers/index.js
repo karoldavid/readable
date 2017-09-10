@@ -7,7 +7,8 @@ import {
 	SAVE_MODIFICATIONS,
 	ADD_COMMENT,
 	GET_COMMENTS,
-	DELETE_COMMENT
+	DELETE_COMMENT,
+	SAVE_MOD_COMMENT
 } from '../actions'
  
 import { combineReducers } from 'redux'
@@ -55,11 +56,11 @@ function comments(state = [], action) {
 		case GET_COMMENTS:
 			return action.comments
 		case DELETE_COMMENT:
-			//console.log("DELETE hCOMMENT")
-			//console.log(action)
 			const url = action.payload.url
 		    const id = url.substr(url.indexOf("comments/") + ("comments/".length))
 			return state.filter((comment) => id !== comment.id)
+		case SAVE_MOD_COMMENT:
+			return state
 		default:
 			return state
 	}
