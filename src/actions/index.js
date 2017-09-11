@@ -10,6 +10,9 @@ export const ADD_COMMENT = "ADD_COMMENT"
 export const GET_COMMENTS = "GET_COMMENTS"
 export const DELETE_COMMENT = "DELETE_COMMENT"
 export const SAVE_MOD_COMMENT = "SAVE_MOD_COMMENT"
+export const CHANGE_POST_VOTESCORE = "CHANGE_POST_VOTESCORE"
+
+export const VOTESCORE_LOWEST_FIRST = "VOTESCORE_LOWEST_FIRST"
 
 export const receiveCategories = categories => ({
   type: RECEIVE_CATEGORIES,
@@ -122,4 +125,20 @@ export const saveModifiedComment = comment => dispatch => (
 	ReadableAPI
 	.saveModifiedComment(comment)
 	.then(comment => dispatch(putComment(comment)))
+)
+
+export const changeVoteScore = post => ({
+	type: CHANGE_POST_VOTESCORE,
+	payload: post
+})
+
+export const voteOnPost = (vote, id, callback) => dispatch => (
+   ReadableAPI
+   .votePost(vote, id)
+   .then(post => dispatch(changeVoteScore(post)))
+   .then(() => callback())
+)
+
+export const sortVoteScoreDown = data => dispatch => (
+	console.log("sortVoteScoreDown")
 )

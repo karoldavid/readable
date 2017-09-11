@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 import { Field, reduxForm, initialize } from 'redux-form'
-import { fetchPost, removePost, saveModifications, addComment, fetchComments, deleteComment, saveModifiedComment } from '../actions'
+import { fetchPost, removePost, saveModifications, addComment, fetchComments, deleteComment, saveModifiedComment, voteOnPost } from '../actions'
 import { Link } from 'react-router-dom'
 import { convertTimestamp } from '../utils/helpers'
 
@@ -57,20 +57,10 @@ class ShowPost extends Component {
 		this.openEditModal()
 	}
 
-	onPostVoteScoreIncrement() {
-		const { post } = this.props
-		const { id } = post
-		post.voteScore++
-		this.props.saveModifications(post, () => {
-			this.props.history.push(`/posts/${id}`)
-		})
-	}
+	onPostVoteScore(vote) {
+		const { id } = this.props.post
 
-	onPostVoteScoreDecrement() {
-		const { post } = this.props
-		const { id } = post
-		post.voteScore--
-		this.props.saveModifications(post, () => {
+		this.props.voteOnPost(vote, id, () => {
 			this.props.history.push(`/posts/${id}`)
 		})
 	}
@@ -80,7 +70,7 @@ class ShowPost extends Component {
 		comment.voteScore++
 		this.props.saveModifiedComment(comment, () => {
 			this.props.history.push(`/posts/${id}`)
-		})
+		}) 
 	}
 
 	onCommentVoteScoreDecrement(comment) {
@@ -100,8 +90,8 @@ class ShowPost extends Component {
 				<p>{post.body}</p>
 				<p>Author: {post.author} - Created: {convertTimestamp(post.timestamp)}</p>
 				<p>Vote Score: {post.voteScore}</p>
-				<button onClick={this.onPostVoteScoreDecrement.bind(this)} className="btn waves-effect waves-light">-</button>
-				<button onClick={this.onPostVoteScoreIncrement.bind(this)} className="btn waves-effect waves-light">+</button>
+				<button onClick={() => this.onPostVoteScore("downVote")} className="btn waves-effect waves-light">-</button>
+				<button onClick={() => this.onPostVoteScore("upVote")} className="btn waves-effect waves-light">+</button>
 
 				<br></br>
 				<br></br>
@@ -120,7 +110,7 @@ class ShowPost extends Component {
 					<p>Text: {comment.body}</p>
 					<p>Author: {comment.author} - Created: {convertTimestamp(comment.timestamp)}</p>
 					<p>Votes: {comment.voteScore}</p>
-					<button onClick={() => this.onCommentVoteScoreDecrement(comment)} className="btn waves-effect waves-light">-</button>
+					<button onClick={() => this.onCommentVoteScoreDecrement("upVote")} className="btn waves-effect waves-light">-</button>
 					<button onClick={() => this.onCommentVoteScoreIncrement(comment)} className="btn waves-effect waves-light">+</button>
 
 					<br></br>
@@ -278,7 +268,8 @@ function mapDispatchToProps(dispatch) {
 		saveModifications: (params, callback) => dispatch(saveModifications(params, callback)),
 		getComments: (id) => dispatch(fetchComments(id)),
 		deleteComment: (id) => dispatch(deleteComment(id)),
-		saveModifiedComment: (comment) => dispatch(saveModifiedComment(comment))
+		saveModifiedComment: (comment) => dispatch(saveModifiedComment(comment)),
+		voteOnPost: (vote, id, callback) => dispatch(voteOnPost(vote, id, callback))
 	}
 }
 

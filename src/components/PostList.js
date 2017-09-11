@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { convertTimestamp } from '../utils/helpers'
+import { sortVoteScoreDown } from '../actions'
 
 
 class PostList extends Component {
@@ -21,6 +22,11 @@ class PostList extends Component {
         )
     }
 
+    toggleOrder() {
+        console.log("toggleOrder")
+        this.props.sortVoteScoreDown("lowest")
+    }
+
     render() {
     	const { posts } = this.props
 
@@ -35,6 +41,8 @@ class PostList extends Component {
                     {this.renderPostList(posts)}
             	</ul>
 
+                <button onClick={this.toggleOrder.bind(this)} className="btn waves-effect waves-light">Toggle Order by Vote Score</button>
+
                 <Link to="/posts/new"><button className="btn waves-effect waves-light">Create New Post</button></Link>
             </div>
        )
@@ -45,4 +53,10 @@ function matchStateToProps({ posts }) {
     return { posts }
 }
 
-export default connect(matchStateToProps, null)(PostList)
+function matchDispatchToProps(dispatch) {
+    return {
+        sortVoteScoreDown: (orderBy) => dispatch(sortVoteScoreDown(orderBy))
+    }
+} 
+
+export default connect(matchStateToProps, matchDispatchToProps)(PostList)
