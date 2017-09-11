@@ -2,6 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+function convertTimestamp(timestamp) {
+  let newDate = new Date()
+  newDate.setTime(timestamp)
+  const dateString = newDate.toUTCString()
+  return dateString
+}
+
 class PostList extends Component {
 
     renderPostList(posts) {
@@ -12,7 +19,7 @@ class PostList extends Component {
             notDeleted.map((post) => (
                 <li key={post.id} className="collection-item">
                     <Link to={`/posts/${post.id}`}>
-                        {post.title}
+                        {post.title} - {convertTimestamp(post.timestamp)} - {post.voteScore}
                     </Link>
                 </li>
             ))
