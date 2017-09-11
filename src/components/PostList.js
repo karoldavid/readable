@@ -14,7 +14,7 @@ class PostList extends Component {
             notDeleted.map((post) => (
                 <li key={post.id} className="collection-item">
                     <Link to={`/posts/${post.id}`}>
-                        {post.title} - {convertTimestamp(post.timestamp)} - {post.voteScore}
+                        {post.title} - {convertTimestamp(post.timestamp)} ({post.voteScore})
                     </Link>
                 </li>
             ))

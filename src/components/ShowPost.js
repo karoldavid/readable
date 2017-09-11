@@ -57,7 +57,7 @@ class ShowPost extends Component {
 		this.openEditModal()
 	}
 
-	onVoteScroreIncrement() {
+	onPostVoteScoreIncrement() {
 		const { post } = this.props
 		const { id } = post
 		post.voteScore++
@@ -66,11 +66,27 @@ class ShowPost extends Component {
 		})
 	}
 
-	onVoteScroreDecrement() {
+	onPostVoteScoreDecrement() {
 		const { post } = this.props
 		const { id } = post
 		post.voteScore--
 		this.props.saveModifications(post, () => {
+			this.props.history.push(`/posts/${id}`)
+		})
+	}
+
+	onCommentVoteScoreIncrement(comment) {
+		const { id } = comment
+		comment.voteScore++
+		this.props.saveModifiedComment(comment, () => {
+			this.props.history.push(`/posts/${id}`)
+		})
+	}
+
+	onCommentVoteScoreDecrement(comment) {
+		const { id } = comment
+		comment.voteScore--
+		this.props.saveModifiedComment(comment, () => {
 			this.props.history.push(`/posts/${id}`)
 		})
 	}
@@ -84,9 +100,12 @@ class ShowPost extends Component {
 				<p>{post.body}</p>
 				<p>Author: {post.author} - Created: {convertTimestamp(post.timestamp)}</p>
 				<p>Vote Score: {post.voteScore}</p>
-				<button onClick={this.onVoteScroreDecrement.bind(this)} className="btn waves-effect waves-light">-</button>
-				<button onClick={this.onVoteScroreIncrement.bind(this)} className="btn waves-effect waves-light">+</button>
-			
+				<button onClick={this.onPostVoteScoreDecrement.bind(this)} className="btn waves-effect waves-light">-</button>
+				<button onClick={this.onPostVoteScoreIncrement.bind(this)} className="btn waves-effect waves-light">+</button>
+
+				<br></br>
+				<br></br>
+
 				<Link to={{ pathname: `/posts/${post.id}/edit`}}><button className="btn waves-effect waves-light">Edit Post</button></Link>
 				<button onClick={this.onDelete.bind(this)} className="btn waves-effect waves-light">Delete Post</button>
 				<button onClick={this.onAddComment.bind(this)} className="btn waves-effect waves-light">Add Comment</button>
@@ -99,8 +118,14 @@ class ShowPost extends Component {
 			<div>
 				<li className="collection-item" key={comment.id}>
 					<p>Text: {comment.body}</p>
-					<p>Author: {comment.author}</p>
+					<p>Author: {comment.author} - Created: {convertTimestamp(comment.timestamp)}</p>
 					<p>Votes: {comment.voteScore}</p>
+					<button onClick={() => this.onCommentVoteScoreDecrement(comment)} className="btn waves-effect waves-light">-</button>
+					<button onClick={() => this.onCommentVoteScoreIncrement(comment)} className="btn waves-effect waves-light">+</button>
+
+					<br></br>
+					<br></br>
+
 					<button onClick={() => this.onEditComment(comment)} className="btn waves-effect waves-light">Edit</button>
 					<button onClick={() => this.onDeleteComment(comment)} className="btn waves-effect waves-light">Delete</button>
 				</li>

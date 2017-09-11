@@ -128,6 +128,7 @@ export const deleteComment = (id) => {
 export const saveModifiedComment = (data) => {
 	const comment = {
         body: data.body,
+        voteScore: data.voteScore,
         timestamp: Date.now()
     }
     const id = data.id
