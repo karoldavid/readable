@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 import { Field, reduxForm, initialize } from 'redux-form'
-import { fetchPost, removePost, saveModifications, addComment, fetchComments, deleteComment, saveModifiedComment, voteOnPost } from '../actions'
+import { fetchPost, removePost, saveModifications, addComment, fetchComments, deleteComment, saveModifiedComment, voteOnPost, voteOnComment } from '../actions'
 import { Link } from 'react-router-dom'
 import { convertTimestamp } from '../utils/helpers'
 
@@ -65,20 +65,11 @@ class ShowPost extends Component {
 		})
 	}
 
-	onCommentVoteScoreIncrement(comment) {
+	onCommentVoteScore(vote, comment) {
 		const { id } = comment
-		comment.voteScore++
-		this.props.saveModifiedComment(comment, () => {
-			this.props.history.push(`/posts/${id}`)
+		this.props.voteOnComment(vote, id, () => {
+			this.props.history.push(`/posts/${this.props.post.id}`)
 		}) 
-	}
-
-	onCommentVoteScoreDecrement(comment) {
-		const { id } = comment
-		comment.voteScore--
-		this.props.saveModifiedComment(comment, () => {
-			this.props.history.push(`/posts/${id}`)
-		})
 	}
 
 	showPost(post) {
@@ -110,8 +101,8 @@ class ShowPost extends Component {
 					<p>Text: {comment.body}</p>
 					<p>Author: {comment.author} - Created: {convertTimestamp(comment.timestamp)}</p>
 					<p>Votes: {comment.voteScore}</p>
-					<button onClick={() => this.onCommentVoteScoreDecrement("upVote")} className="btn waves-effect waves-light">-</button>
-					<button onClick={() => this.onCommentVoteScoreIncrement(comment)} className="btn waves-effect waves-light">+</button>
+					<button onClick={() => this.onCommentVoteScore("downVote", comment)} className="btn waves-effect waves-light">-</button>
+					<button onClick={() => this.onCommentVoteScore("upVote", comment)} className="btn waves-effect waves-light">+</button>
 
 					<br></br>
 					<br></br>
@@ -269,7 +260,8 @@ function mapDispatchToProps(dispatch) {
 		getComments: (id) => dispatch(fetchComments(id)),
 		deleteComment: (id) => dispatch(deleteComment(id)),
 		saveModifiedComment: (comment) => dispatch(saveModifiedComment(comment)),
-		voteOnPost: (vote, id, callback) => dispatch(voteOnPost(vote, id, callback))
+		voteOnPost: (vote, id, callback) => dispatch(voteOnPost(vote, id, callback)),
+		voteOnComment: (vote, id, callback) => dispatch(voteOnComment(vote, id, callback))
 	}
 }
 

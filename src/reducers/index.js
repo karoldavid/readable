@@ -9,7 +9,8 @@ import {
 	GET_COMMENTS,
 	DELETE_COMMENT,
 	SAVE_MOD_COMMENT,
-	CHANGE_POST_VOTESCORE
+	CHANGE_POST_VOTESCORE,
+	CHANGE_COMMENT_VOTESCORE
 } from '../actions'
  
 import { combineReducers } from 'redux'
@@ -45,7 +46,6 @@ function post(state = {}, action) {
 	switch (action.type) {
 		case RECEIVE_POST:
 			return action.post
-
 		case CHANGE_POST_VOTESCORE:
 			return action.payload
 		default:
@@ -65,6 +65,8 @@ function comments(state = [], action) {
 			return state.filter((comment) => id !== comment.id)
 		case SAVE_MOD_COMMENT:
 			return state.map((comment) => comment.id === action.payload.id ? action.payload : comment);
+		case CHANGE_COMMENT_VOTESCORE:
+			return state.map((comment) => comment.id === action.payload.id ? action.payload : comment)
 		default:
 			return state
 	}

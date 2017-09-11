@@ -11,6 +11,7 @@ export const GET_COMMENTS = "GET_COMMENTS"
 export const DELETE_COMMENT = "DELETE_COMMENT"
 export const SAVE_MOD_COMMENT = "SAVE_MOD_COMMENT"
 export const CHANGE_POST_VOTESCORE = "CHANGE_POST_VOTESCORE"
+export const CHANGE_COMMENT_VOTESCORE = "CHANGE_COMMENT_VOTESCORE"
 
 export const VOTESCORE_LOWEST_FIRST = "VOTESCORE_LOWEST_FIRST"
 
@@ -127,7 +128,7 @@ export const saveModifiedComment = comment => dispatch => (
 	.then(comment => dispatch(putComment(comment)))
 )
 
-export const changeVoteScore = post => ({
+export const changePostVoteScore = post => ({
 	type: CHANGE_POST_VOTESCORE,
 	payload: post
 })
@@ -135,7 +136,19 @@ export const changeVoteScore = post => ({
 export const voteOnPost = (vote, id, callback) => dispatch => (
    ReadableAPI
    .votePost(vote, id)
-   .then(post => dispatch(changeVoteScore(post)))
+   .then(post => dispatch(changePostVoteScore(post)))
+   .then(() => callback())
+)
+
+export const changeCommentVoteScore = comment => ({
+	type: CHANGE_COMMENT_VOTESCORE,
+	payload: comment
+})
+
+export const voteOnComment = (vote, id, callback) => dispatch => (
+   ReadableAPI
+   .voteComment(vote, id)
+   .then(comment => dispatch(changeCommentVoteScore(comment)))
    .then(() => callback())
 )
 
