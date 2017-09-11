@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 
 class CategoryList extends Component {
 
-
 	renderCategoryList(categories) {
 		return (
 			categories.map((category) => (

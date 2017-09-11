@@ -1,16 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { convertTimestamp } from '../utils/helpers'
 
 class Category extends Component {
 
 	renderCategoryPostList(posts, category) {
-		const matchingPosts = posts.filter(post => post.category === category)
+		const matchingPosts = posts.filter(post => post.category === category && !post.deleted)
 
 		return(
-
 			matchingPosts.map((post) => (
-				<li key={post.id} className="collection-item">{post.title}</li>
+			     <li key={post.id} className="collection-item">
+                    <Link to={`/posts/${post.id}`}>
+                        {post.title} - {convertTimestamp(post.timestamp)} ({post.voteScore})
+                    </Link>
+                </li>
 			))
 		)
 	}
