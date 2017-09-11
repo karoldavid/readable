@@ -4,6 +4,7 @@ import Modal from 'react-modal'
 import { Field, reduxForm, initialize } from 'redux-form'
 import { fetchPost, removePost, saveModifications, addComment, fetchComments, deleteComment, saveModifiedComment } from '../actions'
 import { Link } from 'react-router-dom'
+import { convertTimestamp } from '../utils/helpers'
 
 const customStyles = {
   content : {
@@ -81,12 +82,11 @@ class ShowPost extends Component {
 				<h3>{post.title}</h3>
 				<p>Category: {post.category}</p>
 				<p>{post.body}</p>
-				<p>Author: {post.author}</p>
+				<p>Author: {post.author} - Created: {convertTimestamp(post.timestamp)}</p>
 				<p>Vote Score: {post.voteScore}</p>
 				<button onClick={this.onVoteScroreDecrement.bind(this)} className="btn waves-effect waves-light">-</button>
 				<button onClick={this.onVoteScroreIncrement.bind(this)} className="btn waves-effect waves-light">+</button>
-				<br></br>
-				<br></br>
+			
 				<Link to={{ pathname: `/posts/${post.id}/edit`}}><button className="btn waves-effect waves-light">Edit Post</button></Link>
 				<button onClick={this.onDelete.bind(this)} className="btn waves-effect waves-light">Delete Post</button>
 				<button onClick={this.onAddComment.bind(this)} className="btn waves-effect waves-light">Add Comment</button>
