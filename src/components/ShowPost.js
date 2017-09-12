@@ -96,8 +96,8 @@ class ShowPost extends Component {
 
 	showComments(comment) {
 		return(
-			<div>
-				<li className="collection-item" key={comment.id}>
+			<div key={comment.id}>
+				<li className="list-group-item" key={comment.id}>
 					<p>Text: {comment.body}</p>
 					<p>Author: {comment.author} - Created: {convertTimestamp(comment.timestamp)}</p>
 					<p>Votes: {comment.voteScore}</p>
@@ -176,7 +176,7 @@ class ShowPost extends Component {
 				{this.showPost(post)}
 
 				<p>Number of Comments: {comments.length}</p>
-				<ul className="collection">
+				<ul className="list-group">
 				 	{ comments.map(comment => this.showComments(comment))}
 				</ul>
 
@@ -204,11 +204,11 @@ class ShowPost extends Component {
 								className="input-field"
 								component={this.renderField}
 							/>
-							<button type="submit" className="btn waves-effect waves-light">Save Comment</button>
+							<button type="submit" className="btn btn-default">Save Comment</button>
 						</form>
       					
 		        		 <button
-		        		 	className="btn waves-effect waves-light"
+		        		 	className="btn btn-default"
                       		onClick={this.closeModal}>Cancel
                         </button>
 		        	</div>
@@ -216,6 +216,7 @@ class ShowPost extends Component {
 		        </Modal>
 
 		        <Modal
+        		  overlayClassName='overlay'
 		          isOpen={this.state.editModalOpen}
 		          onRequestClose={this.closeEditModal}
 		          contentLabel='Modal'
@@ -232,12 +233,12 @@ class ShowPost extends Component {
 								className="input-field"
 								component={this.renderField}
 							/>
-							<button type="submit" className="btn waves-effect waves-light">Save Comment</button>
+							<button type="submit" className="btn btn-default">Save Comment</button>
 						</form>
       					
 		        		 <button
-		        		 	className="btn waves-effect waves-light"
-                      		onClick={this.closeModal}>Cancel
+		        		 	className="btn btn-default"
+                      		onClick={this.closeEditModal}>Cancel
                         </button>
 		        	</div>
 		         

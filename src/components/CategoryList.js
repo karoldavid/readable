@@ -7,7 +7,7 @@ class CategoryList extends Component {
 	renderCategoryList(categories) {
 		return (
 			categories.map((category) => (
-				<li key={category.name} className="collection-item">
+				<li key={category.name} className="list-group-item">
 	            	<Link to={{ pathname: `/category/${category.name}`}}>
 	            		{category.name}
 	            	</Link>
@@ -22,7 +22,7 @@ class CategoryList extends Component {
 		return (
 			<div> 
 				<h3>Choose a Category</h3>
-				<ul className="collection">
+				<ul className="list-group">
 					{this.renderCategoryList(categories)}
 	        	</ul>
         	</div>

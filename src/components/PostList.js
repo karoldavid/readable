@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { ListGroup, ListGroupItem, ButtonToolbar, ToggleButtonGroup, ToggleButton, DropdownButton, MenuItem, Button } from 'react-bootstrap';
 import { convertTimestamp } from '../utils/helpers'
 import { sortVoteScoreDown } from '../actions'
 
@@ -13,7 +14,7 @@ class PostList extends Component {
 
         return (
             notDeleted.map((post) => (
-                <li key={post.id} className="collection-item">
+                <li key={post.id} className="list-group-item">
                     <Link to={`/posts/${post.id}`}>
                         {post.title} - {convertTimestamp(post.timestamp)} ({post.voteScore})
                     </Link>
@@ -22,9 +23,45 @@ class PostList extends Component {
         )
     }
 
-    toggleOrder() {
-        console.log("toggleOrder")
-        this.props.sortVoteScoreDown("lowest")
+    onSortByChange(event) {
+        console.log(event)
+    }
+
+    onSortDirectionChange(event) {
+        console.log(event)
+    }
+
+    renderToolBar() {
+        const postListOrderAscDesc = 'asc'
+
+        return(
+            <div>
+                <ButtonToolbar>
+                    <DropdownButton
+                        title="Sort By"
+                        id="bg-nested-dropdown"
+                        onSelect={(event) => {
+                          this.onSortByChange(event);
+                        }}
+                    >
+                        <MenuItem eventKey="voteScore">Vote Score</MenuItem>
+                        <MenuItem eventKey="timestamp">Post Date</MenuItem>
+                    </DropdownButton>
+                    <ToggleButtonGroup
+                        type="radio"
+                        name="postListSortAscDesc"
+                        defaultValue={postListOrderAscDesc}
+                        onChange={(event) => {
+                            this.onSortDirectionChange(event);
+                        }}
+                      >
+                      <ToggleButton value="asc">Ascending</ToggleButton>
+                      <ToggleButton value="desc">Descending</ToggleButton>
+                    </ToggleButtonGroup>
+    
+                </ButtonToolbar>
+            </div>
+        )
     }
 
     render() {
@@ -37,11 +74,11 @@ class PostList extends Component {
     	return (
             <div>
                 <h3>Posts</h3>
-        		<ul className="collection">
+        		<ul className="list-group">
                     {this.renderPostList(posts)}
             	</ul>
 
-                <button onClick={this.toggleOrder.bind(this)} className="btn waves-effect waves-light">Toggle Order by Vote Score</button>
+                {this.renderToolBar()}
 
                 <Link to="/posts/new"><button className="btn waves-effect waves-light">Create New Post</button></Link>
             </div>

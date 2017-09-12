@@ -8,12 +8,26 @@ class NewPost extends Component {
 
 	renderField(field) {
 		return (
-	    	<div>
+	    	<div className="form-group">
 	      		<label>{field.input.label}</label>
-	      		<input {...field.input}/>
+	      		<input className="form-control" {...field.input}/>
 	      		{field.touched && field.error && <div className="error">{field.error}</div>}
 	    	</div>
 	    )
+	}
+
+	renderDrowpDownSelect() {
+		return(
+			<div>
+				<h3>Choose a Category!"</h3>
+				<select name="cars">
+				  <option value="volvo">Volvo</option>
+				  <option value="saab">Saab</option>
+				  <option value="fiat">Fiat</option>
+				  <option value="auda">Audi</option>
+				</select>
+			</div>
+		)
 	}
 
 	handleFormSubmit(params) {
@@ -27,7 +41,7 @@ class NewPost extends Component {
 		const { handleSubmit } = this.props
 
 		return(
-			<div>
+			<div className="row">
 				<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 					<Field
 						name="title"
@@ -57,11 +71,13 @@ class NewPost extends Component {
 						className="input-field"
 						component={this.renderField}
 					/>
-					 <button type="submit" className="btn waves-effect waves-light">
+					 <button type="submit" className="btn btn-default">
 						Save Post
   					</button>
-  					<Link to="/"><button className="btn waves-effect waves-light">Cancel</button></Link>
+  					<Link to="/"><button className="btn btn-default">Cancel</button></Link>
 				</form>
+
+				{this.renderDrowpDownSelect()}
 			</div>
 		)
 	}
