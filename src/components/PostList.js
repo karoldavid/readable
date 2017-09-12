@@ -32,7 +32,7 @@ class PostList extends Component {
         this.props.sortPostsByDirection(event)
     }
 
-    renderToolBar() {
+    renderPostListToolBar() {
         const postListOrder = 'asc'
         const postListSortProperty = 'voteScore'
 
@@ -61,7 +61,7 @@ class PostList extends Component {
                       <ToggleButton value="asc">Ascending</ToggleButton>
                       <ToggleButton value="desc">Descending</ToggleButton>
                     </ToggleButtonGroup>
-    
+                     <Link to="/posts/new"><Button className="btn waves-effect waves-light">Create New Post</Button></Link>
                 </ButtonToolbar>
             </div>
         )
@@ -81,9 +81,8 @@ class PostList extends Component {
                     {this.renderPostList(posts)}
             	</ul>
 
-                {this.renderToolBar()}
+                {this.renderPostListToolBar()}
 
-                <Link to="/posts/new"><button className="btn waves-effect waves-light">Create New Post</button></Link>
             </div>
        )
     }

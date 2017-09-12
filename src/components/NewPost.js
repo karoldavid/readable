@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { savePost } from '../actions'
 import { Link } from 'react-router-dom'
+import { FormGroup } from 'react-bootstrap'
+import { savePost } from '../actions'
 
 class NewPost extends Component {
 
@@ -14,20 +15,6 @@ class NewPost extends Component {
 	      		{field.touched && field.error && <div className="error">{field.error}</div>}
 	    	</div>
 	    )
-	}
-
-	renderDrowpDownSelect() {
-		return(
-			<div>
-				<h3>Choose a Category!"</h3>
-				<select name="cars">
-				  <option value="volvo">Volvo</option>
-				  <option value="saab">Saab</option>
-				  <option value="fiat">Fiat</option>
-				  <option value="auda">Audi</option>
-				</select>
-			</div>
-		)
 	}
 
 	handleFormSubmit(params) {
@@ -42,7 +29,7 @@ class NewPost extends Component {
 
 		return(
 			<div className="row">
-				<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+				<form className="col-md-12" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 					<Field
 						name="title"
 						type="text"
@@ -77,7 +64,6 @@ class NewPost extends Component {
   					<Link to="/"><button className="btn btn-default">Cancel</button></Link>
 				</form>
 
-				{this.renderDrowpDownSelect()}
 			</div>
 		)
 	}
