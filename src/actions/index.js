@@ -12,7 +12,8 @@ export const DELETE_COMMENT = "DELETE_COMMENT"
 export const SAVE_MOD_COMMENT = "SAVE_MOD_COMMENT"
 export const CHANGE_POST_VOTESCORE = "CHANGE_POST_VOTESCORE"
 export const CHANGE_COMMENT_VOTESCORE = "CHANGE_COMMENT_VOTESCORE"
-export const SORT_BY_VOTESCORE = "SORT_BY_VOTESCORE"
+export const SORT_BY_DIRECTION = "SORT_BY_DIRECTION"
+export const SORT_BY_CATEGORY = "SORT_BY_CATEGORY"
 
 export const VOTESCORE_LOWEST_FIRST = "VOTESCORE_LOWEST_FIRST"
 
@@ -153,14 +154,16 @@ export const voteOnComment = (vote, id, callback) => dispatch => (
    .then(() => callback())
 )
 
-export const postsByVoteScore = orderBy =>({
-	type: SORT_BY_VOTESCORE,
-	payload: orderBy
-})
-
-export function sortPostsByVoteScore ( orderBy ) {
+export function sortPostsByDirection(ascDesc) {
   return {
-    type: SORT_BY_VOTESCORE,
-    orderBy
+    type: SORT_BY_DIRECTION,
+    ascDesc
   }
-};
+}
+
+export function sortPostsByCategory(category) {
+	return {
+		type: SORT_BY_CATEGORY,
+		category
+	}
+}

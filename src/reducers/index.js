@@ -11,7 +11,8 @@ import {
 	SAVE_MOD_COMMENT,
 	CHANGE_POST_VOTESCORE,
 	CHANGE_COMMENT_VOTESCORE,
-	SORT_BY_VOTESCORE
+	SORT_BY_DIRECTION,
+	SORT_BY_CATEGORY
 } from '../actions'
  
 import { combineReducers } from 'redux'
@@ -40,10 +41,14 @@ function posts(state = [], action) {
 			return state.filter((post) => id !== post.id)
 		case SAVE_MODIFICATIONS:
 			return state.map((post) => post.id === action.payload.id ? action.payload : post)
-		case SORT_BY_VOTESCORE:
-			console.log(SORT_BY_VOTESCORE)
-			console.log(action.orderBy)
-			return _.orderBy(state, ['voteScore'],[action.orderBy]);
+		case SORT_BY_DIRECTION:
+			console.log(SORT_BY_DIRECTION)
+			console.log(action.ascDesc)
+			return _.orderBy(state, ['voteScore'],[action.ascDesc]);
+		case SORT_BY_CATEGORY:
+			console.log(SORT_BY_CATEGORY)
+			console.log(action.categories)
+			return _.orderBy(state, [action.category]);
 		default:
 			return state
 	}
@@ -78,8 +83,6 @@ function comments(state = [], action) {
 			return state
 	}
 }
-
-
 
 export default combineReducers({
   categories,

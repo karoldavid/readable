@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { ListGroup, ListGroupItem, ButtonToolbar, ToggleButtonGroup, ToggleButton, DropdownButton, MenuItem, Button } from 'react-bootstrap';
 import { convertTimestamp } from '../utils/helpers'
-import { sortPostsByVoteScore } from '../actions'
+import { sortPostsByDirection, sortPostsByCategory } from '../actions'
 
 
 class PostList extends Component {
@@ -23,25 +23,27 @@ class PostList extends Component {
         )
     }
 
-    onSortByChange(event) {
-        console.log(event)
+    onSortByPropertyChange(event) {
+        this.props.sortPostsByCategory(event)
     }
 
     onSortDirectionChange(event) {
-        this.props.sortPostsByVoteScore(event)
+        this.props.sortPostsByDirection(event)
     }
 
     renderToolBar() {
-        const postListOrderAscDesc = 'asc'
+        const postListOrder = 'asc'
+        const postListSortProperty = 'voteScore'
 
         return(
             <div>
                 <ButtonToolbar>
                     <DropdownButton
                         title="Sort By"
-                        id="bg-nested-dropdown"
+                        defaultValue={postListSortProperty}
+                        id="post-list-category-order"
                         onSelect={(event) => {
-                          this.onSortByChange(event);
+                          this.onSortByPropertyChange(event);
                         }}
                     >
                         <MenuItem eventKey="voteScore">Vote Score</MenuItem>
@@ -49,8 +51,8 @@ class PostList extends Component {
                     </DropdownButton>
                     <ToggleButtonGroup
                         type="radio"
-                        name="postListSortAscDesc"
-                        defaultValue={postListOrderAscDesc}
+                        name="postListOrder"
+                        defaultValue={postListOrder}
                         onChange={(event) => {
                             this.onSortDirectionChange(event);
                         }}
@@ -92,7 +94,8 @@ function matchStateToProps({ posts }) {
 
 function matchDispatchToProps(dispatch) {
     return {
-        sortPostsByVoteScore: (orderBy) => dispatch(sortPostsByVoteScore(orderBy))
+        sortPostsByCategory: (category) => dispatch(sortPostsByCategory(category)),
+        sortPostsByDirection: (ascDesc) => dispatch(sortPostsByDirection(ascDesc))
     }
 } 
 
