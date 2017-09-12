@@ -28,6 +28,7 @@ class PostList extends Component {
     }
 
     onSortDirectionChange(event) {
+        console.log()
         this.props.sortPostsByDirection(event)
     }
 

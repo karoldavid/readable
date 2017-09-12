@@ -32,7 +32,7 @@ function categories(state = [], action) {
 function posts(state = [], action) {
 	switch (action.type) {
 		case RECEIVE_POSTS:
-			return action.posts
+			return _.orderBy(action.posts, ['voteScore'],['desc']);
 		case SAVE_POST:
 			return state.concat(action.post)
 		case DELETE_POST:
@@ -47,7 +47,7 @@ function posts(state = [], action) {
 			return _.orderBy(state, ['voteScore'],[action.ascDesc]);
 		case SORT_BY_CATEGORY:
 			console.log(SORT_BY_CATEGORY)
-			console.log(action.categories)
+			console.log(action.category)
 			return _.orderBy(state, [action.category]);
 		default:
 			return state
