@@ -10,11 +10,14 @@ import {
 	DELETE_COMMENT,
 	SAVE_MOD_COMMENT,
 	CHANGE_POST_VOTESCORE,
-	CHANGE_COMMENT_VOTESCORE
+	CHANGE_COMMENT_VOTESCORE,
+	SORT_BY_VOTESCORE
 } from '../actions'
  
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
+import _ from 'lodash'
+
 
 function categories(state = [], action) {
 	switch (action.type) {
@@ -37,6 +40,10 @@ function posts(state = [], action) {
 			return state.filter((post) => id !== post.id)
 		case SAVE_MODIFICATIONS:
 			return state.map((post) => post.id === action.payload.id ? action.payload : post)
+		case SORT_BY_VOTESCORE:
+			console.log(SORT_BY_VOTESCORE)
+			console.log(action.orderBy)
+			return _.orderBy(state, ['voteScore'],[action.orderBy]);
 		default:
 			return state
 	}
@@ -71,6 +78,8 @@ function comments(state = [], action) {
 			return state
 	}
 }
+
+
 
 export default combineReducers({
   categories,

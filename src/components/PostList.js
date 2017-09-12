@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { ListGroup, ListGroupItem, ButtonToolbar, ToggleButtonGroup, ToggleButton, DropdownButton, MenuItem, Button } from 'react-bootstrap';
 import { convertTimestamp } from '../utils/helpers'
-import { sortVoteScoreDown } from '../actions'
+import { sortPostsByVoteScore } from '../actions'
 
 
 class PostList extends Component {
@@ -28,7 +28,7 @@ class PostList extends Component {
     }
 
     onSortDirectionChange(event) {
-        console.log(event)
+        this.props.sortPostsByVoteScore(event)
     }
 
     renderToolBar() {
@@ -92,7 +92,7 @@ function matchStateToProps({ posts }) {
 
 function matchDispatchToProps(dispatch) {
     return {
-        sortVoteScoreDown: (orderBy) => dispatch(sortVoteScoreDown(orderBy))
+        sortPostsByVoteScore: (orderBy) => dispatch(sortPostsByVoteScore(orderBy))
     }
 } 
 
