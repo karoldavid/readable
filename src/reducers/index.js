@@ -40,8 +40,6 @@ function posts(state = initialPosts, action) {
 	const direction = action.ascDesc ? action.ascDesc : state.postsOrderDirection
 	const category = action.category ? action.category : state.postsOrderBy
 
-	console.log(state)
-
 	switch (action.type) {
 		case RECEIVE_POSTS:
 			return { ...state, posts: _.orderBy(posts, [category],[direction]) }
@@ -55,9 +53,10 @@ function posts(state = initialPosts, action) {
 			return { ...state, posts: posts.map((post) => post.id === action.payload.id ? action.payload : post) }
 		case SORT_BY_DIRECTION:
 			const postsOrderDirection = state.postsOrderDirection
-			return { ...state, posts: _.orderBy(posts, [category],[direction]), postsOrderDirection: direction }
+			return { ...state, posts: _.orderBy(posts, [category], [direction]), postsOrderDirection: direction }
 		case SORT_BY_CATEGORY:
-			return { ...state, posts: _.orderBy(posts, [category]) }
+			const postsOrderBy = state.postsOrderBy
+			return { ...state, posts: _.orderBy(posts, [category]), postsOrderBy: category }
 		default:
 			return state
 	}
