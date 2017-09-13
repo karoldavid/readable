@@ -28,7 +28,6 @@ class PostList extends Component {
     }
 
     onSortDirectionChange(event) {
-        console.log()
         this.props.sortPostsByDirection(event)
     }
 
@@ -68,12 +67,10 @@ class PostList extends Component {
     }
 
     render() {
-    	const { posts } = this.props
+    	const { posts } = this.props.posts
 
-        if (!posts) {
-            return <div>Loading...</div>
-        }
-        
+        console.log(this.props)
+
     	return (
             <div>
                 <h3>Posts</h3>

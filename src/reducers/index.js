@@ -29,26 +29,33 @@ function categories(state = [], action) {
   }
 }
 
-function posts(state = [], action) {
+const initialPosts = {
+  posts: [],
+  postsOrderBy: 'timestamp',
+  postsOrderDirection: 'desc',
+}
+
+function posts(state = initialPosts, action) {
 	switch (action.type) {
 		case RECEIVE_POSTS:
-			return _.orderBy(action.posts, ['voteScore'],['desc']);
+			const posts = action.posts
+			const category = action.postsOrderBy
+			const direction = action.postsOrderDirection
+			return { ...state, posts: _.orderBy(posts, [category],[direction]) }
 		case SAVE_POST:
-			return state.concat(action.post)
+			return { ...state, posts: state.posts.concat(action.post) }
 		case DELETE_POST:
 		    const url = action.payload.url
 		    const id = url.substr(url.indexOf("posts/") + ("posts/".length))
-			return state.filter((post) => id !== post.id)
-		case SAVE_MODIFICATIONS:
-			return state.map((post) => post.id === action.payload.id ? action.payload : post)
+			return { ...state, posts: state.posts.filter((post) => id !== post.id) }
+		case SAVE_MODIFICATIONS: 
+			return { ...state, posts: state.posts.map((post) => post.id === action.payload.id ? action.payload : post) }
 		case SORT_BY_DIRECTION:
 			console.log(SORT_BY_DIRECTION)
 			console.log(action.ascDesc)
-			return _.orderBy(state, ['voteScore'],[action.ascDesc]);
+			return { ...state, posts: _.orderBy(state, ['voteScore'],[action.ascDesc]) }
 		case SORT_BY_CATEGORY:
-			console.log(SORT_BY_CATEGORY)
-			console.log(action.category)
-			return _.orderBy(state, [action.category]);
+			return { ...state, posts:_.orderBy(state, [action.category]) }
 		default:
 			return state
 	}
