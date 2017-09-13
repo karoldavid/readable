@@ -32,8 +32,8 @@ class PostList extends Component {
     }
 
     renderPostListToolBar() {
-        const postListOrder = 'asc'
-        const postListSortProperty = 'voteScore'
+        const postListOrder = this.props.posts.sortPostsByCategory
+        const postListSortProperty = this.props.posts.sortPostsByDirection
 
         return(
             <div>
@@ -68,8 +68,6 @@ class PostList extends Component {
 
     render() {
     	const { posts } = this.props.posts
-
-        console.log(this.props)
 
     	return (
             <div>

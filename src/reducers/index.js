@@ -36,26 +36,28 @@ const initialPosts = {
 }
 
 function posts(state = initialPosts, action) {
+	const posts = action.posts ? action.posts : state.posts
+	const direction = action.ascDesc ? action.ascDesc : state.postsOrderDirection
+	const category = action.category ? action.category : state.postsOrderBy
+
+	console.log(state)
+
 	switch (action.type) {
 		case RECEIVE_POSTS:
-			const posts = action.posts
-			const category = action.postsOrderBy
-			const direction = action.postsOrderDirection
 			return { ...state, posts: _.orderBy(posts, [category],[direction]) }
 		case SAVE_POST:
-			return { ...state, posts: state.posts.concat(action.post) }
+			return { ...state, posts: posts.concat(action.post) }
 		case DELETE_POST:
 		    const url = action.payload.url
 		    const id = url.substr(url.indexOf("posts/") + ("posts/".length))
-			return { ...state, posts: state.posts.filter((post) => id !== post.id) }
+			return { ...state, posts: posts.filter((post) => id !== post.id) }
 		case SAVE_MODIFICATIONS: 
-			return { ...state, posts: state.posts.map((post) => post.id === action.payload.id ? action.payload : post) }
+			return { ...state, posts: posts.map((post) => post.id === action.payload.id ? action.payload : post) }
 		case SORT_BY_DIRECTION:
-			console.log(SORT_BY_DIRECTION)
-			console.log(action.ascDesc)
-			return { ...state, posts: _.orderBy(state, ['voteScore'],[action.ascDesc]) }
+			const postsOrderDirection = state.postsOrderDirection
+			return { ...state, posts: _.orderBy(posts, [category],[direction]), postsOrderDirection: direction }
 		case SORT_BY_CATEGORY:
-			return { ...state, posts:_.orderBy(state, [action.category]) }
+			return { ...state, posts: _.orderBy(posts, [category]) }
 		default:
 			return state
 	}
