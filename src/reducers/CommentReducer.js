@@ -6,7 +6,7 @@ import {
 	CHANGE_COMMENT_VOTESCORE,
 	SORT_BY_DIRECTION,
 	SORT_BY_CATEGORY
-} from '../actions'
+} from '../actions/CommentActions'
 
 import _ from 'lodash'
 

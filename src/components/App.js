@@ -23,11 +23,11 @@ class App extends Component {
       <div className="app">
 
         <Switch>
-          <Route path="/:cat/:id" component={ShowPost}/>
-          <Route path="/:cat" component={Category}/>
           <Route path="/posts/new" component={NewPost}/>
           <Route path="/posts/:id/edit" component={EditPost}/>
           <Route path="/posts/:id" component={ShowPost}/>
+          <Route path="/:cat/:id" component={ShowPost}/>
+          <Route path="/:cat" component={Category}/>
           <Route exact path="/" render={() => (
             <div>
               <CategoryList/>

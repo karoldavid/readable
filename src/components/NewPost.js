@@ -27,6 +27,8 @@ class NewPost extends Component {
 
 		const { handleSubmit } = this.props
 
+		console.log("NewPost")
+
 		return(
 			<div className="row">
 				<form className="col-md-12" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
