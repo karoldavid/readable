@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { FormGroup } from 'react-bootstrap'
+import { Form, FormControl, FormGroup, ControlLabel, Col, Button, Tooltip, OverlayTrigger } from 'react-bootstrap'
 import { savePost } from '../actions/PostActions'
 
 class NewPost extends Component {
@@ -29,7 +29,7 @@ class NewPost extends Component {
 
 		return(
 			<div className="row">
-				<form className="col-md-12" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+				<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 					<Field
 						name="title"
 						type="text"
