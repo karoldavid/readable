@@ -11,7 +11,7 @@ class NewPost extends Component {
 		return (
 	    	<div className="form-group">
 	      		<label>{field.input.label}</label>
-	      		<input className="form-control" {...field.input}/>
+	      		<input className="form-control" type="text" {...field.input}/>
 	      		{field.touched && field.error && <div className="error">{field.error}</div>}
 	    	</div>
 	    )
@@ -28,7 +28,7 @@ class NewPost extends Component {
 		const { handleSubmit } = this.props
 
 		return(
-			<div className="row">
+			<div>
 				<form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 					<Field
 						name="title"
@@ -58,10 +58,10 @@ class NewPost extends Component {
 						className="input-field"
 						component={this.renderField}
 					/>
-					 <button type="submit" className="btn btn-default">
+					 <button type="submit" className="btn btn-primary">
 						Save Post
   					</button>
-  					<Link to="/"><button className="btn btn-default">Cancel</button></Link>
+  					<Link to="/"><button className="btn btn-danger">Cancel</button></Link>
 				</form>
 
 			</div>
