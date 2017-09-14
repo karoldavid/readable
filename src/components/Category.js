@@ -20,7 +20,6 @@ class Category extends Component {
 	}
 
 	render() {
-		console.log(this.props.match.params)
 		const category = this.props.match.params.cat
 		const { posts } = this.props.posts
 
