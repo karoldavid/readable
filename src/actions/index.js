@@ -166,4 +166,16 @@ export function sortPostsByCategory(category) {
 		type: SORT_BY_CATEGORY,
 		category
 	}
+}export function sortCommentsByDirection(ascDesc) {
+  return {
+    type: SORT_BY_DIRECTION,
+    ascDesc
+  }
+}
+
+export function sortCommentsByCategory(category) {
+	return {
+		type: SORT_BY_CATEGORY,
+		category
+	}
 }

@@ -35,6 +35,13 @@ const initialPosts = {
   postsOrderDirection: 'desc',
 }
 
+const initialComments = {
+  comments: [],
+  commentsOrderBy: 'timestamp',
+  commentsOrderDirection: 'desc',
+}
+
+
 function posts(state = initialPosts, action) {
 	const posts = action.posts ? action.posts : state.posts
 	const direction = action.ascDesc ? action.ascDesc : state.postsOrderDirection
@@ -73,12 +80,17 @@ function post(state = {}, action) {
 	}
 }
 
-function comments(state = [], action) {
+function comments(state = initialComments, action) {
+	const comments = action.comments ? action.comments : state.comments
+	const category = 'timestap'
+	const direction = 'desc'
+
 	switch (action.type) {
 		case ADD_COMMENT:
 			return state.concat(action.comment)
 		case GET_COMMENTS:
-			return action.comments
+			const comments = action.comments
+			return { ...state, comments: _.orderBy(comments, [category],[direction]) }
 		case DELETE_COMMENT:
 			const url = action.payload.url
 		    const id = url.substr(url.indexOf("comments/") + ("comments/".length))

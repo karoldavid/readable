@@ -11,7 +11,7 @@ class Category extends Component {
 		return(
 			matchingPosts.map((post) => (
 			     <li key={post.id} className="collection-item">
-                    <Link to={`/posts/${post.id}`}>
+                    <Link to={`/${category}/${post.id}`}>
                         {post.title} - {convertTimestamp(post.timestamp)} ({post.voteScore})
                     </Link>
                 </li>
@@ -20,8 +20,9 @@ class Category extends Component {
 	}
 
 	render() {
+		console.log(this.props.match.params)
 		const category = this.props.match.params.cat
-		const { posts } = this.props
+		const { posts } = this.props.posts
 
 		return(
 			<div>

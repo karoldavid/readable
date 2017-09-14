@@ -8,7 +8,7 @@ class CategoryList extends Component {
 		return (
 			categories.map((category) => (
 				<li key={category.name} className="list-group-item">
-	            	<Link to={{ pathname: `/category/${category.name}`}}>
+	            	<Link to={{ pathname: `/${category.name}`}}>
 	            		{category.name}
 	            	</Link>
 	            </li>

@@ -2,7 +2,20 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
 import { Field, reduxForm, initialize } from 'redux-form'
-import { fetchPost, removePost, saveModifications, addComment, fetchComments, deleteComment, saveModifiedComment, voteOnPost, voteOnComment } from '../actions'
+
+import { fetchPost,
+	removePost,
+	saveModifications,
+	addComment,
+	fetchComments,
+	deleteComment,
+	saveModifiedComment,
+	voteOnPost,
+	voteOnComment,
+	sortCommentsByCategory,
+	sortCommentsByDirection
+} from '../actions'
+
 import { Link } from 'react-router-dom'
 import { convertTimestamp } from '../utils/helpers'
 
@@ -165,8 +178,9 @@ class ShowPost extends Component {
 	}
 
 	render() {
-		const { post, comments, handleSubmit } = this.props
-
+		const { post, handleSubmit } = this.props
+		const comments = this.props.comments.comments
+		
 		if (!post) {
 			return <div>Loading post...</div>
 		}
@@ -262,7 +276,9 @@ function mapDispatchToProps(dispatch) {
 		deleteComment: (id) => dispatch(deleteComment(id)),
 		saveModifiedComment: (comment) => dispatch(saveModifiedComment(comment)),
 		voteOnPost: (vote, id, callback) => dispatch(voteOnPost(vote, id, callback)),
-		voteOnComment: (vote, id, callback) => dispatch(voteOnComment(vote, id, callback))
+		voteOnComment: (vote, id, callback) => dispatch(voteOnComment(vote, id, callback)),
+		sortCommentsByCategory: (category) => dispatch(sortCommentsByCategory(category)),
+        sortCommentsByDirection: (ascDesc) => dispatch(sortCommentsByDirection(ascDesc))
 	}
 }
 
