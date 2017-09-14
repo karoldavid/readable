@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm, initialize } from 'redux-form'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { saveModifications } from '../actions'
+import { saveModifications } from '../actions/PostActions'
 
 class EditPost extends Component {
 

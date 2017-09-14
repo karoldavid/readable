@@ -8,18 +8,9 @@ import {
 	CHANGE_POST_VOTESCORE,
 	SORT_BY_DIRECTION,
 	SORT_BY_CATEGORY
-} from '../actions'
+} from '../actions/PostActions'
 
 import _ from 'lodash'
-
-export function categories(state = [], action) {
-	switch (action.type) {
-  		case RECEIVE_CATEGORIES: 
-      		return action.categories
-    	default:
-    		return state
-  }
-}
 
 const initialPosts = {
   posts: [],

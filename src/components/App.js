@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch, withRouter } from 'react-router-dom'
-import { fetchCategories } from '../actions'
-import { fetchPosts } from '../actions'
+import { fetchCategories } from '../actions/CategoryActions'
+import { fetchPosts } from '../actions/PostActions'
 
 import CategoryList from './CategoryList'
 import PostList from './PostList' 

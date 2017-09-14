@@ -6,15 +6,18 @@ import { Field, reduxForm, initialize } from 'redux-form'
 import { fetchPost,
 	removePost,
 	saveModifications,
+	voteOnPost,
+} from '../actions/PostActions'
+
+import { 
 	addComment,
 	fetchComments,
 	deleteComment,
 	saveModifiedComment,
-	voteOnPost,
 	voteOnComment,
 	sortCommentsByCategory,
 	sortCommentsByDirection
-} from '../actions'
+} from '../actions/CommentActions'
 
 import { Link } from 'react-router-dom'
 import { convertTimestamp } from '../utils/helpers'

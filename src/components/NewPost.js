@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { FormGroup } from 'react-bootstrap'
-import { savePost } from '../actions'
+import { savePost } from '../actions/PostActions'
 
 class NewPost extends Component {
 

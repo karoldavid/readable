@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { ListGroup, ListGroupItem, ButtonToolbar, ToggleButtonGroup, ToggleButton, DropdownButton, MenuItem, Button } from 'react-bootstrap';
 import { convertTimestamp } from '../utils/helpers'
-import { sortPostsByDirection, sortPostsByCategory } from '../actions'
+import { sortPostsByDirection, sortPostsByCategory } from '../actions/PostActions'
 
 
 class PostList extends Component {
