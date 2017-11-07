@@ -31,7 +31,7 @@ Questions? Send an email to: k.zysk@zoho.com
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-## Acknowledgments
+## Acknowledgements
 
 * https://github.com/udacity/reactnd-project-readable-starter.git
 * https://www.udacity.com/course/react-nanodegree--nd019
