@@ -24,6 +24,7 @@ Make sure you have Node v6 or later and npm installed.
 ## Author
 
 * **Karol Zyskowski**
+
 Questions? Send an email to: k.zysk@zoho.com
 
 ## License
